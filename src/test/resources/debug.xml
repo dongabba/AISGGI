@@ -4,11 +4,6 @@
 		<parameter name="username" value="ggi_insp" />
 		<parameter name="password" value="ggi_insp" />
 		<parameter name="role" value="АИС «Инспектор»" />
-		<test name = "UserLoginAsInsp">
-			<classes>
-				<class name="ru.fors.tests.LoginTests"/>
-			</classes>
-		</test>
 		<test name = "CreateOrderstests">
 			<classes>
 				<class name="ru.fors.tests.CreateOrderTests"/>

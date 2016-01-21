@@ -129,12 +129,21 @@
 			</activation>
 		</profile>
 		<profile>
-			<id>test_chrome</id>
+		<id>test_chrome</id>
+		<properties>
+			<site.url>${url}</site.url>
+			<imp.wait>${wait.seconds}</imp.wait>
+			<browser.name>chrome</browser.name>
+			<suites>test_env</suites>
+		</properties>
+		</profile>
+		<profile>
+			<id>debug</id>
 			<properties>
 				<site.url>${url}</site.url>
 				<imp.wait>${wait.seconds}</imp.wait>
-				<browser.name>chrome</browser.name>
-				<suites>test_env</suites>
+				<browser.name>firefox</browser.name>
+				<suites>debug</suites>
 			</properties>
 		</profile>
 		<profile>

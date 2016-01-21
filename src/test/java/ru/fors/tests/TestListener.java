@@ -29,7 +29,7 @@ public class TestListener implements ITestListener {
 	@Override
 	public void onTestFailure(ITestResult arg0) {
 		takeAttach();
-		TestBase.tearDown();
+		//TestBase.tearDown();
 		
 	}
 

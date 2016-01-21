@@ -35,6 +35,7 @@ public class TestBase {
 	}
 	
 	
+	/*
 	@AfterTest
 	public static void tearDown() {
 		if (driver !=null) {
@@ -42,7 +43,7 @@ public class TestBase {
 			driver = null;
 		}
 	}
-
+	*/
 	public void userLogin(String username, String password){
 		LoginPage loginPage = new LoginPage(driver);
 		MainPage mainPage = loginPage.userLogin(username, password);

@@ -13,7 +13,7 @@ public class MainPage extends Page {
 	}
 	By userRole = By.cssSelector(".page-title__arm");
 	By logoutLink = By.linkText("Выход");
-	By createOrderP = By.linkText("Создать распоряжение Р-");
+	By createOrderP = By.linkText("  Создать распоряжение Р-");
 
 
 	public MainPage waitForPageLoaded(){
@@ -22,6 +22,7 @@ public class MainPage extends Page {
 	}
 	@Step("Проверяем роль пользователя")
 	public String getUserRole(){
+		waitForPageLoaded();
 		return getElementText(userRole);
 	}
 	
@@ -33,6 +34,7 @@ public class MainPage extends Page {
 
 	@Step("Переходим к странице создания распоряжения Р-")
 	public CreateOrderPage userCreateOrderP(){
+		waitForPageLoaded();
 		click(createOrderP);
 		return new CreateOrderPage(driver);
 	}

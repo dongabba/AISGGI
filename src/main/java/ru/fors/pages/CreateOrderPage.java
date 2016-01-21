@@ -18,7 +18,7 @@ public class CreateOrderPage extends Page{
     By data = By.name("date:date"); //дата документа
     By signedBy = By.xpath("//span[contains(@id, 'signedBy')]//a"); //должностное лицо
     By orderReason = By.cssSelector("select[name='instruction:foundation']"); //основание распоряжения
-    By against = By.xpath("//span[contains(@id, 'signedBy')]//a"); //в отношении
+    By against = By.xpath("//div[contains(@id, 'id_org')]//a"); //в отношении
     By checkTarget = By.cssSelector("select[name='instruction:checkTarget']"); //цель проверки
     By checkTasks = By.cssSelector("textarea[name='instruction:checkTasks:joinedValues']"); //задачи проверки
     By calculateTermButton = By.cssSelector("button[id*='calculateTerm']");
@@ -39,12 +39,12 @@ public class CreateOrderPage extends Page{
 
     public void userSelectValue(By element, String value){
             click(element);
-            wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".select2-input")));
-            click(By.cssSelector(".select2-input"));
-            type(By.cssSelector(".select2-input"), value);
-            wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".select2-result-label")));
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".select2-input")));
+            click(By.cssSelector(".select2-input.select2-focused"));
+            type(By.cssSelector(".select2-input.select2-focused"), value);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".select2-result-label")));
             click(By.cssSelector(".select2-result-label"));
-            wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
+            //wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
     }
     @Step("Устанавливаем значение поля \"Правовые основания проведения проверки\" = Гражданский Кодекс Российской Федерации")
     public void userSetJurDocs(){
@@ -71,8 +71,7 @@ public class CreateOrderPage extends Page{
     @Step("Устанавливаем значение поля \"Основание распоряжения\" = Ежегодный план проведения плановых проверок")
     public void userSetOrderReason(){
         Select select = new Select(driver.findElement(orderReason));
-        select.deselectAll();
-        select.selectByIndex(0);
+        select.selectByIndex(1);
     }
 
     @Step("Выбираем юридическое лицо")
@@ -83,7 +82,6 @@ public class CreateOrderPage extends Page{
     @Step("Устанавливаем значение поля \"Цель проведения проверки\" = План проведения плановых проверок юридических лиц и индивидуальных предпринимателей ГЖИ")
     public void userSetCheckTarget(){
         Select select = new Select(driver.findElement(checkTarget));
-        select.deselectAll();
         select.selectByIndex(1);
     }
 
@@ -105,8 +103,7 @@ public class CreateOrderPage extends Page{
     @Step("Устанавливаем значение поля \"Проверка проведена\" = Индивидуально")
     public void userSetCheckMethod(){
         Select select = new Select(driver.findElement(checkMethod));
-        select.deselectAll();
-        select.selectByIndex(0);
+        select.selectByIndex(1);
     }
 
     @Step("Выбираем исполнителя")
