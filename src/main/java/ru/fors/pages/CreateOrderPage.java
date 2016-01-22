@@ -6,6 +6,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import java.util.Random;
+
 /**
  * Created by Alexander Zhaleyko on 20.01.2016.
  */
@@ -15,10 +17,13 @@ public class CreateOrderPage extends Page{
         super(driver);
     }
 
+    Random random = new Random();
+    String orderNumb;
     By data = By.name("date:date"); //дата документа
-    By signedBy = By.xpath("//span[contains(@id, 'signedBy')]//a"); //должностное лицо
+    By fullN = By.cssSelector("input[name='number:fullNum.num']");
+    By signedBy = By.xpath("//form/div[@class='act-panel']/div[4]//a"); //должностное лицо
     By orderReason = By.cssSelector("select[name='instruction:foundation']"); //основание распоряжения
-    By against = By.xpath("//div[contains(@id, 'id_org')]//a"); //в отношении
+    By against = By.xpath("//div[@id='tab1']//div[@class='act-panel']/div[3]//a"); //в отношении
     By checkTarget = By.cssSelector("select[name='instruction:checkTarget']"); //цель проверки
     By checkTasks = By.cssSelector("textarea[name='instruction:checkTasks:joinedValues']"); //задачи проверки
     By calculateTermButton = By.cssSelector("button[id*='calculateTerm']");
@@ -28,8 +33,10 @@ public class CreateOrderPage extends Page{
     By checkMethod = By.cssSelector("select[name='instruction:checkMethod']"); //проверка проведена
     By preparerField = By.xpath("//span[contains(@id, 'preparer')]//a"); //Исполнитель
     By checkAddressLink = By.linkText("Адреса проверки"); //Адреса проверки
-    By checkAddressField = By.xpath("//div[contains(@id, 'id_address')]/a"); //поле для выбора адресов проверки
+    By checkAddressField = By.xpath("//div[@id='tab1']//div[@class='act-panel']/div[19]//a"); //поле для выбора адресов проверки
     By saveButton = By.linkText("Сохранить"); //сохранить распоряжение
+    By deleteOrderButton = By.linkText("Удалить"); //удалить распоряжение
+    By returnToMainPageButton = By.linkText("Возврат в список");
 
 
 
@@ -37,15 +44,7 @@ public class CreateOrderPage extends Page{
 
 
 
-    public void userSelectValue(By element, String value){
-            click(element);
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".select2-input")));
-            click(By.cssSelector(".select2-input.select2-focused"));
-            type(By.cssSelector(".select2-input.select2-focused"), value);
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".select2-result-label")));
-            click(By.cssSelector(".select2-result-label"));
-            //wait.until(ExpectedConditions.textToBePresentInElementValue(element, value));
-    }
+
     @Step("Устанавливаем значение поля \"Правовые основания проведения проверки\" = Гражданский Кодекс Российской Федерации")
     public void userSetJurDocs(){
         click(jurDocs);
@@ -98,6 +97,7 @@ public class CreateOrderPage extends Page{
     @Step("Выбираем административные регламенты")
     public void userSetAdmReglament(){
         click(admReglament);
+        click(admReglament);
     }
 
     @Step("Устанавливаем значение поля \"Проверка проведена\" = Индивидуально")
@@ -121,8 +121,11 @@ public class CreateOrderPage extends Page{
         click(saveButton);
     }
     @Step("Создаем распоряжение")
-    public void userCreateOrderP(String date, String user, String userAgainst, String preparer, String address){
+    public String userCreateOrderP(String date, String user, String userAgainst, String preparer, String address){
+        String fullNumb = String.valueOf(random.nextInt(999999));
+        orderNumb = "39ОГ-"+fullNumb+"-1-9-2016";
         userSetDate(date);
+        type(fullN, fullNumb);
         userSetSignedBy(user);
         userSetOrderReason();
         userSetAgainst(userAgainst);
@@ -136,5 +139,21 @@ public class CreateOrderPage extends Page{
         userGotoCheckAddress();
         userSetCheckAdress(address);
         userSaveOrder();
+        return orderNumb;
+    }
+
+    public boolean isOrderCreated(){
+        try{
+            wait.until(ExpectedConditions.presenceOfElementLocated(deleteOrderButton));
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
+    @Step("Выходим на главную страницу")
+    public MainPage userGoToMainPage (){
+        click(returnToMainPageButton);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h3[text()='Обратите внимание']")));
+        return new MainPage(driver);
     }
 }

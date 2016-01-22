@@ -4,10 +4,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import ru.fors.pages.CreateOrderPage;
+import ru.fors.pages.JournalsPage;
 import ru.fors.pages.LoginPage;
 import ru.fors.pages.MainPage;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
+
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Alexander Zhaleyko on 20.01.2016.
@@ -30,6 +33,12 @@ public class CreateOrderTests extends TestBase{
         LoginPage loginPage = new LoginPage(driver);
         MainPage mainPage = loginPage.userLogin(username, password);
         CreateOrderPage createOrderPage = mainPage.userCreateOrderP();
-        createOrderPage.userCreateOrderP(dateFormat.format(date), "Глазунов В. М.", "Веста-комфорт", "Бесхлебнов ", "Раменский район, город Раменское, улица Чугунова, д. 15А");
+        String orderNumb = createOrderPage.userCreateOrderP(dateFormat.format(date), "Глазунов В. М.", "ООО \"УК \"Вишневый сад\"", "Бесхлебнов ", "Раменский район, город Раменское, улица Чугунова, д. 15А");
+        assertTrue("Распоряжение с типом Р- не сохранилось", createOrderPage.isOrderCreated());
+        System.out.println(orderNumb);
+        createOrderPage.userGoToMainPage();
+        JournalsPage journalsPage = mainPage.userGoToInstructionsJournal();
+        journalsPage.waitForPageInstructionsJournalLoaded();
+        journalsPage.userSetOrderNumber(orderNumb);
     }
 }

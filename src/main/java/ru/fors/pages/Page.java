@@ -3,6 +3,7 @@ package ru.fors.pages;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -87,6 +88,23 @@ public class Page {
 				count = count + 1;
 			}
 		}
+	}
+
+	public void userSelectValue(By element, String value){
+		int count = 0;
+        while (count < 5 ){
+            try{
+                click(element);
+                WebDriverWait wait1 = new WebDriverWait(driver, 5);
+                wait1.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[class*='select2-focused']")));
+                break;
+            } catch (Exception e){
+                count=count+1;
+            }
+        }
+		type(By.cssSelector("input[class*='select2-focused']"), value);
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.className("span[class='select2-match']"), value));
+        driver.findElement(By.cssSelector("input[class*='select2-focused']")).sendKeys(Keys.ENTER);
 	}
 
 }

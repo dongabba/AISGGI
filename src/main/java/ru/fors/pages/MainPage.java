@@ -15,6 +15,12 @@ public class MainPage extends Page {
 	By logoutLink = By.linkText("Выход");
 	By createOrderP = By.linkText("  Создать распоряжение Р-");
 
+	//=======Меню Журналы и реестры========
+	By journalsAnrRegistryLink = By.linkText("Журналы и реестры");
+
+	//=======Инспекционные журналы=======
+	By inspJourlalsLink = By.linkText("Инспекционные журналы");
+	By instructionsJournal = By.linkText("Журнал распоряжений");
 
 	public MainPage waitForPageLoaded(){
 		wait.until(ExpectedConditions.visibilityOfElementLocated(userRole));
@@ -37,5 +43,12 @@ public class MainPage extends Page {
 		waitForPageLoaded();
 		click(createOrderP);
 		return new CreateOrderPage(driver);
+	}
+
+	//Журнал распоряжений
+	@Step("Переходим на страницу \"Журнал распоряжений\"")
+	public JournalsPage userGoToInstructionsJournal(){
+		clickOn3Link(journalsAnrRegistryLink, inspJourlalsLink, instructionsJournal);
+		return new JournalsPage(driver);
 	}
 }
