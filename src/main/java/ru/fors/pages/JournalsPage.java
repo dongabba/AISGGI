@@ -14,7 +14,11 @@ public class JournalsPage extends Page{
     }
     //=======Инспекционные журналы========
     By instructionsJournalTitle = By.xpath("//h3[text()='Распоряжения']");
-    By orderNumberSearchField = By.xpath("//div[contains(@id, 'id_number')]/a");
+    By orderNumberSearchField = By.xpath("//div[contains(@class, 'span40')]/div[4]//a");
+
+    By findButton = By.xpath("//button[text()='Искать']");
+    By orderNumberInTable = By.xpath("//div[@class='table-wrap']//tbody//td[2]");
+    By orderStatusInTable = By.xpath("//div[@class='table-wrap']//tbody//td[8]");
 
     public void waitForPageInstructionsJournalLoaded (){
         wait.until(ExpectedConditions.visibilityOfElementLocated(instructionsJournalTitle));
@@ -22,5 +26,28 @@ public class JournalsPage extends Page{
 
     public void userSetOrderNumber(String number){
         userSelectValue(orderNumberSearchField, number);
+    }
+
+    public void userClickFindButton(){
+        click(findButton);
+    }
+
+    public String userGetFindOrderNumber(){
+        return getElementText(orderNumberInTable);
+    }
+
+    public String userGetFindOrderStatus(){
+        return getElementText(orderStatusInTable);
+    }
+
+    public void userSearchOrder(String number){
+        userSetOrderNumber(number);
+        userClickFindButton();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(orderNumberInTable));
+    }
+
+    public OrderPage userOpenOrder(){
+        mouseDoubleClick(driver.findElement(By.xpath("//div[@class='table-wrap']//tbody//td[2]")));
+        return new OrderPage(driver);
     }
 }

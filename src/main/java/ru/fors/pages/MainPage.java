@@ -39,10 +39,10 @@ public class MainPage extends Page {
 	}
 
 	@Step("Переходим к странице создания распоряжения Р-")
-	public CreateOrderPage userCreateOrderP(){
+	public OrderPage userCreateOrderP(){
 		waitForPageLoaded();
 		click(createOrderP);
-		return new CreateOrderPage(driver);
+		return new OrderPage(driver);
 	}
 
 	//Журнал распоряжений

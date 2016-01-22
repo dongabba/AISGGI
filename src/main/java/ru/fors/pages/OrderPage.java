@@ -11,14 +11,15 @@ import java.util.Random;
 /**
  * Created by Alexander Zhaleyko on 20.01.2016.
  */
-public class CreateOrderPage extends Page{
+public class OrderPage extends Page{
 
-    public CreateOrderPage(WebDriver driver) {
+    public OrderPage(WebDriver driver) {
         super(driver);
     }
 
     Random random = new Random();
     String orderNumb;
+    By pageTitle = By.xpath("//h3[text()='Распоряжение']");
     By data = By.name("date:date"); //дата документа
     By fullN = By.cssSelector("input[name='number:fullNum.num']");
     By signedBy = By.xpath("//form/div[@class='act-panel']/div[4]//a"); //должностное лицо
@@ -26,19 +27,23 @@ public class CreateOrderPage extends Page{
     By against = By.xpath("//div[@id='tab1']//div[@class='act-panel']/div[3]//a"); //в отношении
     By checkTarget = By.cssSelector("select[name='instruction:checkTarget']"); //цель проверки
     By checkTasks = By.cssSelector("textarea[name='instruction:checkTasks:joinedValues']"); //задачи проверки
-    By calculateTermButton = By.cssSelector("button[id*='calculateTerm']");
+    By calculateTermButton = By.xpath("//button[text()='Рассчитать']");
     By jurDocs = By.linkText("Правовые основания проведения проверки:"); //Правовые основания проведения проверки
     By jurAct = By.cssSelector("input[name*='repeater:16']"); //Гражданский Кодекс Российской Федерации
     By admReglament = By.cssSelector("input[name='instruction:checkReglament']"); //Административные регламенты
     By checkMethod = By.cssSelector("select[name='instruction:checkMethod']"); //проверка проведена
-    By preparerField = By.xpath("//span[contains(@id, 'preparer')]//a"); //Исполнитель
+    By preparerField = By.xpath("//div[@id='tab1']//div[@class='act-panel']/div[19]//a"); //Исполнитель
     By checkAddressLink = By.linkText("Адреса проверки"); //Адреса проверки
-    By checkAddressField = By.xpath("//div[@id='tab1']//div[@class='act-panel']/div[19]//a"); //поле для выбора адресов проверки
+    By checkAddressField = By.xpath("//div[@id='tab2']//div[@class='act-panel__line clearfix'][2]//a"); //поле для выбора адресов проверки
     By saveButton = By.linkText("Сохранить"); //сохранить распоряжение
     By deleteOrderButton = By.linkText("Удалить"); //удалить распоряжение
-    By returnToMainPageButton = By.linkText("Возврат в список");
+    By transfToWorkButton = By.linkText("Передать в работу"); //передать в работу
+    By returnOrderButton = By.linkText("Вернуть на доработку"); //Вернуть на доработку
+    By closeOrderButton = By.linkText("Возврат в список");
 
-
+    public void waitForOrderPageLoaded(){
+        wait.until(ExpectedConditions.presenceOfElementLocated(pageTitle));
+    }
 
 
 
@@ -152,8 +157,18 @@ public class CreateOrderPage extends Page{
     }
     @Step("Выходим на главную страницу")
     public MainPage userGoToMainPage (){
-        click(returnToMainPageButton);
+        click(closeOrderButton);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h3[text()='Обратите внимание']")));
         return new MainPage(driver);
+    }
+
+    public void userChangeOrderStatusToTransfToWork(){
+        click(transfToWorkButton);
+        wait.until(ExpectedConditions.presenceOfElementLocated(returnOrderButton));
+    }
+
+    public JournalsPage userCloseOrder(){
+        click(closeOrderButton);
+        return new JournalsPage(driver);
     }
 }

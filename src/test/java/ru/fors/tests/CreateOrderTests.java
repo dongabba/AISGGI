@@ -3,7 +3,7 @@ package ru.fors.tests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import ru.fors.pages.CreateOrderPage;
+import ru.fors.pages.OrderPage;
 import ru.fors.pages.JournalsPage;
 import ru.fors.pages.LoginPage;
 import ru.fors.pages.MainPage;
@@ -32,13 +32,20 @@ public class CreateOrderTests extends TestBase{
     public void createOrderPTest(String username, String password){
         LoginPage loginPage = new LoginPage(driver);
         MainPage mainPage = loginPage.userLogin(username, password);
-        CreateOrderPage createOrderPage = mainPage.userCreateOrderP();
-        String orderNumb = createOrderPage.userCreateOrderP(dateFormat.format(date), "Глазунов В. М.", "ООО \"УК \"Вишневый сад\"", "Бесхлебнов ", "Раменский район, город Раменское, улица Чугунова, д. 15А");
-        assertTrue("Распоряжение с типом Р- не сохранилось", createOrderPage.isOrderCreated());
-        System.out.println(orderNumb);
-        createOrderPage.userGoToMainPage();
+        OrderPage orderPage = mainPage.userCreateOrderP();
+        orderPage.waitForOrderPageLoaded();
+        String orderNumb = orderPage.userCreateOrderP(dateFormat.format(date), "Глазунов В. М.", "ООО \"УК \"Вишневый сад\"", "Бесхлебнов", "Чеховский район, город Чехов, улица Вишневая, д. 2");
+        assertTrue("Распоряжение с типом Р- не сохранилось", orderPage.isOrderCreated());
+        orderPage.userGoToMainPage();
         JournalsPage journalsPage = mainPage.userGoToInstructionsJournal();
         journalsPage.waitForPageInstructionsJournalLoaded();
-        journalsPage.userSetOrderNumber(orderNumb);
+        journalsPage.userSearchOrder(orderNumb);
+        assertTrue("Распоряжение не найдено", journalsPage.userGetFindOrderNumber().equals(orderNumb));
+        journalsPage.userOpenOrder();
+        orderPage.waitForOrderPageLoaded();
+        orderPage.userChangeOrderStatusToTransfToWork();
+        orderPage.userCloseOrder();
+        journalsPage.waitForPageInstructionsJournalLoaded();
+        assertTrue("Не изменился статус", journalsPage.userGetFindOrderStatus().equals("В работе"));
     }
 }

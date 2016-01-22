@@ -2,10 +2,9 @@ package ru.fors.pages;
 
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -103,8 +102,22 @@ public class Page {
             }
         }
 		type(By.cssSelector("input[class*='select2-focused']"), value);
-		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.className("span[class='select2-match']"), value));
-        driver.findElement(By.cssSelector("input[class*='select2-focused']")).sendKeys(Keys.ENTER);
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector("span[class='select2-match']"), value));
+        int count2 = 0;
+		while (count2 < 5){
+			try{
+				driver.findElement(By.cssSelector("input[class*='select2-focused']")).sendKeys(Keys.ENTER);
+				wait1.until(ExpectedConditions.textToBePresentInElementLocated(element, value));
+				break;
+			}catch (Exception e){
+				count2=count2+1;
+			}
+		}
+	}
+
+	public void mouseDoubleClick(WebElement element){
+		Actions action = new Actions(driver);
+		action.doubleClick(element).build().perform();
 	}
 
 }
