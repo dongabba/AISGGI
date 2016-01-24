@@ -21,7 +21,9 @@ public class TestBase {
 	public String baseUrl;
 
 	DateFormat dateFormat = new SimpleDateFormat("dd.MM.YYYY");
-	Date date = new Date();
+	Date startDate = new Date(System.currentTimeMillis()-604800000);
+	Date finishDate = new Date(System.currentTimeMillis()-432000000);
+	Date docDate = new Date(System.currentTimeMillis()-345600000);
 
 	@BeforeTest
 	public void init(){

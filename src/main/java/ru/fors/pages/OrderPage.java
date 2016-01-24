@@ -27,6 +27,7 @@ public class OrderPage extends Page{
     By against = By.xpath("//div[@id='tab1']//div[@class='act-panel']/div[3]//a"); //в отношении
     By checkTarget = By.cssSelector("select[name='instruction:checkTarget']"); //цель проверки
     By checkTasks = By.cssSelector("textarea[name='instruction:checkTasks:joinedValues']"); //задачи проверки
+    By checkStartDate = By.cssSelector("input[name*=\"checkStart:date\"]");
     By calculateTermButton = By.xpath("//button[text()='Рассчитать']");
     By jurDocs = By.linkText("Правовые основания проведения проверки:"); //Правовые основания проведения проверки
     By jurAct = By.cssSelector("input[name*='repeater:16']"); //Гражданский Кодекс Российской Федерации
@@ -40,6 +41,10 @@ public class OrderPage extends Page{
     By transfToWorkButton = By.linkText("Передать в работу"); //передать в работу
     By returnOrderButton = By.linkText("Вернуть на доработку"); //Вернуть на доработку
     By closeOrderButton = By.linkText("Возврат в список");
+    By createDocButton = By.linkText("Создать документ");
+
+    //===================================
+    By createActButton = By.linkText("Акт проверки");
 
     public void waitForOrderPageLoaded(){
         wait.until(ExpectedConditions.presenceOfElementLocated(pageTitle));
@@ -94,6 +99,9 @@ public class OrderPage extends Page{
         type(checkTasks, "Проверка задач_АТ");
     }
 
+    public void userSetCheckStartDate(String date){
+        type(checkStartDate, date);
+    }
     @Step("Нажимаем кнопку \"Расчитать\"")
     public void userClickCalculateTermButton(){
         click(calculateTermButton);
@@ -127,7 +135,7 @@ public class OrderPage extends Page{
     }
     @Step("Создаем распоряжение")
     public String userCreateOrderP(String date, String user, String userAgainst, String preparer, String address){
-        String fullNumb = String.valueOf(random.nextInt(999999));
+        String fullNumb = String.valueOf(random.nextInt(99999));
         orderNumb = "39ОГ-"+fullNumb+"-1-9-2016";
         userSetDate(date);
         type(fullN, fullNumb);
@@ -136,6 +144,7 @@ public class OrderPage extends Page{
         userSetAgainst(userAgainst);
         userSetCheckTarget();
         userSetCheckTasks();
+        userSetCheckStartDate(date);
         userClickCalculateTermButton();
         userSetJurDocs();
         userSetAdmReglament();
@@ -170,5 +179,10 @@ public class OrderPage extends Page{
     public JournalsPage userCloseOrder(){
         click(closeOrderButton);
         return new JournalsPage(driver);
+    }
+
+    public ActPage userClickCreateActButton(){
+        clickOn2Link(createDocButton, createActButton);
+        return new ActPage(driver);
     }
 }
