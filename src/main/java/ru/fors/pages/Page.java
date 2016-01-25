@@ -21,43 +21,44 @@ public class Page {
 		wait = new WebDriverWait(driver, Long.parseLong(PropertyLoader.loadProperty("wait")));
 		wait1 = new WebDriverWait(driver, 5);
 	}
-	
-    public void checkElementBeforeAction(By element){
-        int count = 0;
-        while(count<5){
-            try{
-                wait1.until(ExpectedConditions.elementToBeClickable(element));
-                count=count+5;
-            } catch (Exception e){
-                count=count+1;
-            }
-        }
-    }
 
-	public void type(By element, String string){
+	public void checkElementBeforeAction(By element) {
+		int count = 0;
+		while (count < 5) {
+			try {
+				wait1.until(ExpectedConditions.elementToBeClickable(element));
+				count = count + 5;
+			} catch (Exception e) {
+				count = count + 1;
+			}
+		}
+	}
+
+	public void type(By element, String string) {
 		checkElementBeforeAction(element);
-        driver.findElement(element).clear();
+		driver.findElement(element).click();
+		driver.findElement(element).clear();
 		driver.findElement(element).sendKeys(string);
 	}
-	
-	public void click(By element){
+
+	public void click(By element) {
 		checkElementBeforeAction(element);
-        driver.findElement(element).click();
+		driver.findElement(element).click();
 	}
 
-    public void clickMenuElement(By element){
-        driver.findElement(element).click();
-    }
-	
-	public String getElementText(By element){
+	public void clickMenuElement(By element) {
+		driver.findElement(element).click();
+	}
+
+	public String getElementText(By element) {
 		return driver.findElement(element).getText();
 	}
-	
-	public String getUrl(){
+
+	public String getUrl() {
 		return driver.getCurrentUrl();
 	}
 
-	public void clickOn3Link(By element, By element1, By element2){
+	public void clickOn3Link(By element, By element1, By element2) {
 		int count = 0;
 		while (count < 5) {
 			try {
@@ -68,13 +69,13 @@ public class Page {
 				clickMenuElement(element2);
 				break;
 			} catch (Exception e) {
-				System.out.println("Count: " + count + " click exception" );
+				System.out.println("Count: " + count + " click exception");
 				count = count + 1;
 			}
 		}
 	}
 
-	public void clickOn2Link(By element, By element1){
+	public void clickOn2Link(By element, By element1) {
 		int count = 0;
 		while (count < 5) {
 			try {
@@ -83,41 +84,65 @@ public class Page {
 				clickMenuElement(element1);
 				break;
 			} catch (Exception e) {
-				System.out.println("Count: " + count + " click exception" );
+				System.out.println("Count: " + count + " click exception");
 				count = count + 1;
 			}
 		}
 	}
 
-	public void userSelectValue(By element, String value){
+	public void userSelectValue(By element, String value) {
 		int count = 0;
-        while (count < 5 ){
-            try{
-                click(element);
-                WebDriverWait wait1 = new WebDriverWait(driver, 5);
-                wait1.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[class*='select2-focused']")));
-                break;
-            } catch (Exception e){
-                count=count+1;
-            }
-        }
+		while (count < 5) {
+			try {
+				click(element);
+				WebDriverWait wait1 = new WebDriverWait(driver, 5);
+				wait1.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[class*='select2-focused']")));
+				break;
+			} catch (Exception e) {
+				count = count + 1;
+			}
+		}
 		type(By.cssSelector("input[class*='select2-focused']"), value);
 		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector("span[class='select2-match']"), value));
-        int count2 = 0;
-		while (count2 < 5){
-			try{
+		int count2 = 0;
+		while (count2 < 5) {
+			try {
 				driver.findElement(By.cssSelector("input[class*='select2-focused']")).sendKeys(Keys.ENTER);
 				wait1.until(ExpectedConditions.textToBePresentInElementLocated(element, value));
 				break;
-			}catch (Exception e){
-				count2=count2+1;
+			} catch (Exception e) {
+				count2 = count2 + 1;
 			}
 		}
 	}
 
-	public void mouseDoubleClick(WebElement element){
+	public void mouseDoubleClick(WebElement element) {
 		Actions action = new Actions(driver);
 		action.doubleClick(element).build().perform();
 	}
 
+    public void userSetDate(By element1, WebElement element, String date) {
+        driver.findElement(element1).click();
+        driver.findElement(element1).clear();
+        Actions action = new Actions(driver);
+        action.sendKeys(element, date).build().perform();
+    }
+
+	public void userSetTime(By element, String time) {
+		type(element, time);
+		//driver.findElement(dateDoc).sendKeys(Keys.TAB);
+		//driver.findElement(hourDoc).sendKeys(Keys.ENTER);
+		int i = 0;
+		while (i < 5) {
+			try {
+				wait1.until(ExpectedConditions.textToBePresentInElementLocated(element, time));
+				System.out.println("Set value: " + getElementText(element));
+				break;
+			} catch (Exception e) {
+				type(element, time);
+				i = i + 1;
+			}
+		}
+
+	}
 }

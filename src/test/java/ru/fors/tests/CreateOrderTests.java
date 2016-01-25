@@ -47,10 +47,10 @@ public class CreateOrderTests extends TestBase{
         journalsPage.userOpenOrder();
         ActPage actPage = orderPage.userClickCreateActButton();
         actPage.userAddAct(dateFormat.format(docDate),
-                "09",
+                "11",
                 "00",
                 dateFormat.format(startDate),
-                "09",
+                "11",
                 "00",
                 dateFormat.format(finishDate),
                 "18",

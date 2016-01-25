@@ -109,8 +109,16 @@ public class OrderPage extends Page{
 
     @Step("Выбираем административные регламенты")
     public void userSetAdmReglament(){
-        click(admReglament);
-        click(admReglament);
+        int i=0;
+        while (i<5){
+            try{
+                click(admReglament);
+                break;
+            }catch (Exception e){
+                i=i+1;
+            }
+        }
+
     }
 
     @Step("Устанавливаем значение поля \"Проверка проведена\" = Индивидуально")

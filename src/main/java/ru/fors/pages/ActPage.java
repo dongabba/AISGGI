@@ -37,7 +37,7 @@ public class ActPage extends Page {
     By findSubjectButton = By.linkText("Искать");
     By firstSearchResultInAddSubjectWindow = By.xpath("//div[@class='nsi-result-find']//td[2]");
     By selectButton = By.linkText("Выбрать");
-    By dateTransfer = By.cssSelector("input[name=\"transferInformation:actCopyHandedPersonsTable:actCopyHandedPersons:0:date:date]");
+    By dateTransfer = By.cssSelector("input[name=\"transferInformation:actCopyHandedPersonsTable:actCopyHandedPersons:0:date:date\"]");
     By saveActButton = By.linkText("Сохранить");
     By deleteActButton = By.linkText("Удалить");
     By secondViolationRow = By.xpath("//div[@id='tab5']//table//tbody//tr[2]");
@@ -67,57 +67,56 @@ public class ActPage extends Page {
     }
 
     public void userSetDocDate(String date){
-        type(dateDoc, date);
+        userSetDate(dateDoc, driver.findElement(By.cssSelector("input[name=\"date:date\"]")), date);
+        //type(dateDoc, date);
+        //driver.findElement(dateDoc).sendKeys(Keys.TAB);
         //wait.until(ExpectedConditions.textToBePresentInElementLocated(dateDoc, date));
-        driver.findElement(dateDoc).sendKeys(Keys.ENTER);
+
     }
 
     public void userSetDocHour(String hours){
-        type(hourDoc, hours);
-        driver.findElement(hourDoc).sendKeys(Keys.ENTER);
-        wait.until(ExpectedConditions.textToBePresentInElementLocated(hourDoc, hours));
+        userSetTime(hourDoc, hours);
+
     }
 
     public void userSetDocMinutes(String minutes){
-        type(minDoc, minutes);
-        driver.findElement(minDoc).sendKeys(Keys.ENTER);
-        wait.until(ExpectedConditions.textToBePresentInElementLocated(minDoc, minutes));
+        userSetTime(minDoc, minutes);
+
     }
 
     public void userSetStartCheckDate(String date){
-        type(startCheckDate, date);
-        driver.findElement(startCheckDate).sendKeys(Keys.ENTER);
+        userSetDate(startCheckDate, driver.findElement(By.cssSelector("input[name=\"inspectionInfo:checkDuration:container:checkDates:0:from:date\"]")), date);
+        //userSetTime(startCheckDate, date);
+        //driver.findElement(dateDoc).sendKeys(Keys.TAB);
+        //driver.findElement(startCheckDate).submit();
+        //driver.findElement(startCheckDate).sendKeys(Keys.ENTER);
         //wait.until(ExpectedConditions.textToBePresentInElementLocated(startCheckDate, date));
     }
 
     public void userSetStartCheckHours(String hours){
-        type(startCheckHours, hours);
-        driver.findElement(startCheckHours).sendKeys(Keys.ENTER);
-        wait.until(ExpectedConditions.textToBePresentInElementLocated(startCheckHours, hours));
+        userSetTime(startCheckHours, hours);
     }
 
     public void userSetStartCheckMinutes(String minutes){
-        type(startCheckMinutes, minutes);
-        driver.findElement(startCheckMinutes).sendKeys(Keys.ENTER);
-        wait.until(ExpectedConditions.textToBePresentInElementLocated(startCheckMinutes, minutes));
+        userSetTime(startCheckMinutes, minutes);
     }
 
     public void userSetFinishCheckDate(String date){
-        type(finishCheckDate, date);
-        driver.findElement(finishCheckDate).sendKeys(Keys.ENTER);
+        userSetDate(finishCheckDate, driver.findElement(By.cssSelector("input[name=\"inspectionInfo:checkDuration:container:checkDates:0:to:date\"]")), date);
+        //userSetTime(finishCheckDate, date);
+        //driver.findElement(dateDoc).sendKeys(Keys.TAB);
+        //driver.findElement(finishCheckDate).submit();
+        //driver.findElement(finishCheckDate).sendKeys(Keys.ENTER);
         //wait.until(ExpectedConditions.textToBePresentInElementLocated(finishCheckDate, date));
     }
 
     public void userSetFinishCheckHours(String hours){
-        type(finishCheckHours, hours);
-        driver.findElement(finishCheckHours).sendKeys(Keys.ENTER);
-        wait.until(ExpectedConditions.textToBePresentInElementLocated(finishCheckHours, hours));
+        userSetTime(finishCheckHours, hours);
+
     }
 
     public void userSetFinishCheckMinutes (String minutes){
-        type(finishCheckMinutes, minutes);
-        driver.findElement(finishCheckMinutes).sendKeys(Keys.ENTER);
-        wait.until(ExpectedConditions.textToBePresentInElementLocated(finishCheckMinutes, minutes));
+        userSetTime(finishCheckMinutes, minutes);
     }
 
     public void userClickAddViolationButton(){
@@ -200,15 +199,15 @@ public class ActPage extends Page {
                            String name){
         waitForActPageLoaded();
         userSetDocDate(docDate);
-        //userSetDocHour(docHours);
-        //userSetDocMinutes(docMinutes);
+        userSetDocHour(docHours);
+        userSetDocMinutes(docMinutes);
         userOpenCheckInfoTabs();
         userSetStartCheckDate(startDate);
-        //userSetStartCheckHours(startHours);
-        //userSetStartCheckMinutes(startMinutes);
+        userSetStartCheckHours(startHours);
+        userSetStartCheckMinutes(startMinutes);
         userSetFinishCheckDate(finishDate);
-        //userSetFinishCheckHours(finishHours);
-        //userSetFinishCheckMinutes(finishMinutes);
+        userSetFinishCheckHours(finishHours);
+        userSetFinishCheckMinutes(finishMinutes);
         userOpenViolationTab();
         userAddViolation(violation, article);
         userGoToInfoAboutTransferToSubTab();

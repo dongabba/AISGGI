@@ -47,7 +47,16 @@ public class JournalsPage extends Page{
     }
 
     public OrderPage userOpenOrder(){
-        mouseDoubleClick(driver.findElement(By.xpath("//div[@class='table-wrap']//tbody//td[2]")));
+        int i=0;
+        while (i<5) {
+            try {
+                mouseDoubleClick(driver.findElement(By.xpath("//div[@class='table-wrap']//tbody//td[2]")));
+                wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h3[text()='Распоряжение']")));
+                break;
+            } catch (Exception e){
+                i=i+1;
+            }
+        }
         return new OrderPage(driver);
     }
 }
