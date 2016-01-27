@@ -26,7 +26,7 @@ public class CreateOrderTests extends TestBase{
     @Stories("Вход/Выход из системы")
     @Test
     @Parameters({"username", "password"})
-    public void createOrderPTest(String username, String password){
+    public void createOrderPTest(String username, String password) throws InterruptedException {
         LoginPage loginPage = new LoginPage(driver);
         MainPage mainPage = loginPage.userLogin(username, password);
         OrderPage orderPage = mainPage.userCreateOrderP();

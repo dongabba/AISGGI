@@ -35,15 +35,31 @@ public class Page {
 	}
 
 	public void type(By element, String string) {
-		checkElementBeforeAction(element);
-		driver.findElement(element).click();
-		driver.findElement(element).clear();
-		driver.findElement(element).sendKeys(string);
+		//checkElementBeforeAction(element);
+		int i=0;
+        while (i<5){
+            try{
+                driver.findElement(element).click();
+                driver.findElement(element).clear();
+                driver.findElement(element).sendKeys(string);
+                break;
+            } catch (Exception e){
+                i=i+1;
+            }
+        }
 	}
 
 	public void click(By element) {
 		checkElementBeforeAction(element);
-		driver.findElement(element).click();
+        int i=0;
+        while (i<5){
+            try {
+                driver.findElement(element).click();
+                break;
+            } catch (Exception e){
+                i=i+1;
+            }
+        }
 	}
 
 	public void clickMenuElement(By element) {
@@ -121,28 +137,7 @@ public class Page {
 		action.doubleClick(element).build().perform();
 	}
 
-    public void userSetDate(By element1, WebElement element, String date) {
-        driver.findElement(element1).click();
-        driver.findElement(element1).clear();
-        Actions action = new Actions(driver);
-        action.sendKeys(element, date).build().perform();
-    }
 
-	public void userSetTime(By element, String time) {
-		type(element, time);
-		//driver.findElement(dateDoc).sendKeys(Keys.TAB);
-		//driver.findElement(hourDoc).sendKeys(Keys.ENTER);
-		int i = 0;
-		while (i < 5) {
-			try {
-				wait1.until(ExpectedConditions.textToBePresentInElementLocated(element, time));
-				System.out.println("Set value: " + getElementText(element));
-				break;
-			} catch (Exception e) {
-				type(element, time);
-				i = i + 1;
-			}
-		}
 
-	}
+
 }

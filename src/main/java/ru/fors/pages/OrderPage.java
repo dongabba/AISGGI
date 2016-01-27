@@ -46,6 +46,14 @@ public class OrderPage extends Page{
     //===================================
     By createActButton = By.linkText("Акт проверки");
 
+
+    //Дата документа
+    By calendarIcon = By.xpath("//form/div[@class='act-panel']/div[@class='act-panel__line clearfix'][3]//img");
+    By calheader = By.className("calheader");
+    By prevMonthButton = By.className("calnavleft");
+    By nextMonthButton = By.className("calnavright");
+    By calendar = By.cssSelector(".m1");
+
     public void waitForOrderPageLoaded(){
         wait.until(ExpectedConditions.presenceOfElementLocated(pageTitle));
     }
@@ -127,6 +135,11 @@ public class OrderPage extends Page{
         select.selectByIndex(1);
     }
 
+    public void userSetDate1(String date){
+        DatePicker dp = new DatePicker(driver);
+        dp.userSetDate(By.xpath("//form/div[@class='act-panel']/div[@class='act-panel__line clearfix'][3]//img"), By.className("calheader"), By.className("calnavright"), By.className("calnavleft"), By.cssSelector(".m1"), date);
+    }
+
     @Step("Выбираем исполнителя")
     public void userSetPreparer(String preparer){
         userSelectValue(preparerField, preparer);
@@ -145,7 +158,7 @@ public class OrderPage extends Page{
     public String userCreateOrderP(String date, String user, String userAgainst, String preparer, String address){
         String fullNumb = String.valueOf(random.nextInt(99999));
         orderNumb = "39ОГ-"+fullNumb+"-1-9-2016";
-        userSetDate(date);
+        userSetDate1(date);
         type(fullN, fullNumb);
         userSetSignedBy(user);
         userSetOrderReason();
