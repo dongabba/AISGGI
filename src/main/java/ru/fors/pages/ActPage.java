@@ -5,6 +5,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+
 /**
  * Created by gabba on 22.01.16.
  */
@@ -32,15 +33,13 @@ public class ActPage extends Page {
     By saveViolationButton = By.cssSelector("button[name='ok']");
     By infoAboutTransferToSubTab = By.linkText("Информация о передаче акта субъекту");
     By addSubjectButton = By.xpath("//div[@id='tab7']//a[@title='Добавить']");
-    By addSubjectWindowTitle = By.xpath("//h3[text()='Поиск физических лиц']");
-    By subjectName = By.cssSelector("input[name=\"content:form:searchConditionPanel:searchConditionForm:searchConditionTabs:panel:fio\"]");
-    By findSubjectButton = By.linkText("Искать");
-    By firstSearchResultInAddSubjectWindow = By.xpath("//div[@class='nsi-result-find']//td[2]");
-    By selectButton = By.linkText("Выбрать");
     By dateTransfer = By.cssSelector("input[name=\"transferInformation:actCopyHandedPersonsTable:actCopyHandedPersons:0:date:date\"]");
     By saveActButton = By.linkText("Сохранить");
     By deleteActButton = By.linkText("Удалить");
     By secondViolationRow = By.xpath("//div[@id='tab5']//table//tbody//tr[2]");
+    By createDocLink = By.linkText("Создать документ");
+    By prescriptionLink = By.linkText("Предписание");
+    By oneDocPrescription = By.xpath("//form[@class='modal-form']//div[@class='find-block_content']/div[1]//input");
 
 
 
@@ -73,12 +72,14 @@ public class ActPage extends Page {
     }
 
     public void userSetDocHour(String hours) throws InterruptedException {
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(hourDoc, "0"));
         type(hourDoc, hours);
         Thread.sleep(3000);
 
     }
 
     public void userSetDocMinutes(String minutes) throws InterruptedException {
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(minDoc, "0"));
         type(minDoc, minutes);
         Thread.sleep(3000);
 
@@ -90,11 +91,13 @@ public class ActPage extends Page {
     }
 
     public void userSetStartCheckHours(String hours) throws InterruptedException {
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(startCheckHours, "0"));
         type(startCheckHours, hours);
         Thread.sleep(3000);
     }
 
     public void userSetStartCheckMinutes(String minutes) throws InterruptedException {
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(startCheckMinutes, "0"));
         type(startCheckMinutes, minutes);
         Thread.sleep(3000);
     }
@@ -105,12 +108,14 @@ public class ActPage extends Page {
     }
 
     public void userSetFinishCheckHours(String hours) throws InterruptedException {
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(finishCheckHours, "0"));
         type(finishCheckHours, hours);
         Thread.sleep(3000);
 
     }
 
     public void userSetFinishCheckMinutes (String minutes) throws InterruptedException {
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(finishCheckMinutes, "0"));
         type(finishCheckMinutes, minutes);
         Thread.sleep(3000);
     }
@@ -157,16 +162,6 @@ public class ActPage extends Page {
         click(addSubjectButton);
     }
 
-    public void userSelectSubject(String name){
-        userClickAddSubjectButton();
-        wait.until(ExpectedConditions.presenceOfElementLocated(addSubjectWindowTitle));
-        type(subjectName, name);
-        click(findSubjectButton);
-        wait.until(ExpectedConditions.textToBePresentInElementLocated(firstSearchResultInAddSubjectWindow, name));
-        click(firstSearchResultInAddSubjectWindow);
-        click(selectButton);
-        wait.until(ExpectedConditions.presenceOfElementLocated(dateTransfer));
-    }
 
     public void userSetTransferDate(String date){
         click(dateTransfer);
@@ -179,6 +174,11 @@ public class ActPage extends Page {
     public void userSaveAct(){
         userClickSaveActButton();
         wait.until(ExpectedConditions.presenceOfElementLocated(deleteActButton));
+    }
+
+    public void addSubject(String name){
+        NsiForms nsiForms = new NsiForms(driver);
+        nsiForms.userSelectSubject(name);
     }
 
     public void userAddAct(String docDate,
@@ -195,21 +195,29 @@ public class ActPage extends Page {
                            String name) throws InterruptedException {
         waitForActPageLoaded();
         userSetDocDate(docDate);
-        userSetDocHour(docHours);
-        userSetDocMinutes(docMinutes);
+        //userSetDocHour(docHours);
+        //userSetDocMinutes(docMinutes);
         userOpenCheckInfoTabs();
         userSetStartCheckDate(startDate);
-        userSetStartCheckHours(startHours);
-        userSetStartCheckMinutes(startMinutes);
+        //userSetStartCheckHours(startHours);
+        //userSetStartCheckMinutes(startMinutes);
         userSetFinishCheckDate(finishDate);
-        userSetFinishCheckHours(finishHours);
-        userSetFinishCheckMinutes(finishMinutes);
+        //userSetFinishCheckHours(finishHours);
+        //userSetFinishCheckMinutes(finishMinutes);
         userOpenViolationTab();
         userAddViolation(violation, article);
         userGoToInfoAboutTransferToSubTab();
-        userSelectSubject(name);
+        userClickAddSubjectButton();
+        addSubject(name);
         userSetTransferDate(docDate);
         userSaveAct();
+    }
 
+    public PrescriptionPage userClickAddPrescriptionOneDocLink(){
+        clickOn2Link(createDocLink, prescriptionLink);
+        wait.until(ExpectedConditions.presenceOfElementLocated(oneDocPrescription));
+        click(oneDocPrescription);
+        click(saveViolationButton);
+        return new PrescriptionPage(driver);
     }
 }

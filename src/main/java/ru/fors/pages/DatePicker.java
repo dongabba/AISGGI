@@ -60,10 +60,15 @@ public class DatePicker extends Page{
         noOfColumns = datePicker.findElements(By.tagName("td"));
 
         for (WebElement cell : noOfColumns){
+            System.out.println(cell.getText());
             if(cell.getText().equals(expDate)){
-                cell.findElement(By.linkText(expDate)).click();
+                        cell.findElement(By.linkText(expDate)).click();
+                        break;
+                    }
+                }
+
             }
         }
 
-    }
-}
+
+

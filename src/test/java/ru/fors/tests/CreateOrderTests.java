@@ -58,5 +58,24 @@ public class CreateOrderTests extends TestBase{
                 "Отсутствие или неисправность заполнений оконных проемов в подвале",
                 " п.3.3.3",
                 "Вишняков Петр Петрович");
+        PrescriptionPage prescriptionPage = actPage.userClickAddPrescriptionOneDocLink();
+        assertTrue("Предписание не сохранилось", prescriptionPage.userCreatePrescription("Вишняков Петр Петрович", dateFormat.format(prescripDate)));
+        prescriptionPage.userClickCreateOrder2Button();
+        orderPage.waitForOrderPageLoaded();
+        String order2Numb = orderPage.userCreateOrder2(dateFormat.format(startOrder2Date),"Глазунов В. М.", "Бесхлебнов");
+        assertTrue("Распоряжение о проверке предписания не сохранилось", orderPage.isOrderCreated());
+        orderPage.userGoToMainPage();
+        mainPage.userGoToInstructionsJournal();
+        journalsPage.waitForPageInstructionsJournalLoaded();
+        journalsPage.userSearchOrder(order2Numb);
+        assertTrue("Распоряжение не найдено", journalsPage.userGetFindOrderNumber().equals(order2Numb));
+        journalsPage.userOpenOrder();
+        orderPage.waitForOrderPageLoaded();
+        orderPage.userChangeOrderStatusToTransfToWork();
+        orderPage.userCloseOrder();
+        journalsPage.waitForPageInstructionsJournalLoaded();
+        assertTrue("Не изменился статус", journalsPage.userGetFindOrderStatus().equals("В работе"));
+        journalsPage.userOpenOrder();
     }
+
 }

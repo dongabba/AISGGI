@@ -24,6 +24,8 @@ public class TestBase {
 	Date startDate = new Date(System.currentTimeMillis()-604800000);
 	Date finishDate = new Date(System.currentTimeMillis()-432000000);
 	Date docDate = new Date(System.currentTimeMillis()-345600000);
+	Date prescripDate = new Date(System.currentTimeMillis()-259200000);
+	Date startOrder2Date = new Date(System.currentTimeMillis()-172800000);
 
 	@BeforeTest
 	public void init(){

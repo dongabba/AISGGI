@@ -11,7 +11,7 @@
 	  	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	  	<allure.version>1.4.16</allure.version>
         <aspectj.version>1.8.5</aspectj.version>
-		<selenium.version>2.48.2</selenium.version>
+		<selenium.version>2.50.0</selenium.version>
 	  	<url>http://aisggi.fors.ru:8080/ggi-inspection/login?1</url>
 	  	<wait.seconds>60</wait.seconds>
    </properties>

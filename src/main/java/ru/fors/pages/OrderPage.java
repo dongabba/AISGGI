@@ -34,6 +34,7 @@ public class OrderPage extends Page{
     By admReglament = By.cssSelector("input[name='instruction:checkReglament']"); //Административные регламенты
     By checkMethod = By.cssSelector("select[name='instruction:checkMethod']"); //проверка проведена
     By preparerField = By.xpath("//div[@id='tab1']//div[@class='act-panel']/div[19]//a"); //Исполнитель
+    By preparerFieldOrder2 = By.xpath("//div[@id='tab1']//div[@class='act-panel']/div[20]//a");
     By checkAddressLink = By.linkText("Адреса проверки"); //Адреса проверки
     By checkAddressField = By.xpath("//div[@id='tab2']//div[@class='act-panel__line clearfix'][2]//a"); //поле для выбора адресов проверки
     By saveButton = By.linkText("Сохранить"); //сохранить распоряжение
@@ -42,6 +43,10 @@ public class OrderPage extends Page{
     By returnOrderButton = By.linkText("Вернуть на доработку"); //Вернуть на доработку
     By closeOrderButton = By.linkText("Возврат в список");
     By createDocButton = By.linkText("Создать документ");
+    By controlEventsLink = By.linkText("Мероприятия по контролю:");
+    By controlEventsWindowsTitle = By.xpath("//h3[text()='Мероприятия по контролю']");
+    By event = By.cssSelector("input[name=\"content:repeaterCont:repeater:3:checkboxPanel:checkbox\"]");
+    By saveEventButton = By.xpath("//form[@class=\"modal-form\"]//button[@name=\"ok\"]");
 
     //===================================
     By createActButton = By.linkText("Акт проверки");
@@ -177,6 +182,18 @@ public class OrderPage extends Page{
         return orderNumb;
     }
 
+    private void userSetPreparerOrder2(String preparer) {
+        userSelectValue(preparerFieldOrder2, preparer);
+    }
+
+    private void userSetControlsEvent() {
+        click(controlEventsLink);
+        wait.until(ExpectedConditions.presenceOfElementLocated(controlEventsWindowsTitle));
+        click(event);
+        click(saveEventButton);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(controlEventsWindowsTitle));
+    }
+
     public boolean isOrderCreated(){
         try{
             wait.until(ExpectedConditions.presenceOfElementLocated(deleteOrderButton));
@@ -205,5 +222,24 @@ public class OrderPage extends Page{
     public ActPage userClickCreateActButton(){
         clickOn2Link(createDocButton, createActButton);
         return new ActPage(driver);
+    }
+
+    @Step("Пользователь создает распоряжение о проверке исполнения предписания")
+    public String userCreateOrder2(String date, String user, String preparer){
+        String fullNumb = String.valueOf(random.nextInt(99999));
+        orderNumb = "39ОГ-"+fullNumb+"-1-9-2016";
+        userSetDate1(date);
+        userSetSignedBy(user);
+        type(fullN, fullNumb);
+        userSetCheckTasks();
+        userSetCheckStartDate(date);
+        userClickCalculateTermButton();
+        userSetJurDocs();
+        userSetControlsEvent();
+        userSetAdmReglament();
+        userSetCheckMethod();
+        userSetPreparerOrder2(preparer);
+        userSaveOrder();
+        return orderNumb;
     }
 }

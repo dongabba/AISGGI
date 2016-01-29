@@ -35,15 +35,16 @@ public class Page {
 	}
 
 	public void type(By element, String string) {
-		//checkElementBeforeAction(element);
+		checkElementBeforeAction(element);
 		int i=0;
         while (i<5){
             try{
-                driver.findElement(element).click();
+                click(element);
                 driver.findElement(element).clear();
                 driver.findElement(element).sendKeys(string);
                 break;
             } catch (Exception e){
+				System.out.println("Exception: " + e);
                 i=i+1;
             }
         }
