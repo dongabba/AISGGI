@@ -60,6 +60,23 @@ public class MainMenu extends Page {
 
     //=======Меню инспекционные========
     By inspReportsPage = By.linkText("Инспекционные");
+    By dataOfDocEnteredReport = By.linkText("Данные по введенным в АИС ГЖИ документам, детализированный");
+    By workMGIByYearReport = By.linkText("Сведения о работе Государственной жилищной инспекции");
+    By dataOfPrescriptionReport = By.linkText("Данные по предписаниям");
+    By listFormedDocsByAddressReport = By.linkText("Список оформленных документов по адресу");
+    By listCheckActWithoutPrescriptionReport = By.linkText("Список актов, не имеющих предписаний");
+    By inspectionActsReport = By.linkText("Данные по актам осмотра и связанным с ними документам, введенным в ЕИС МЖИ за период");
+    By checkInspectionActsReport = By.linkText("Данные по актам поверки и связанным с ними документам, введенным в ЕИС МЖИ за период");
+    By statisticDataReport = By.linkText("Статистические данные о проведении проверок МЖИ в отношении ЮЛ");
+    By instructionsFizReport = By.linkText("Список распоряжений с истекающим сроком проведения проверки");
+    By subjectRequirementsReport = By.linkText("Список документов, выданных на субъект предписания");
+    By inspectionReferenceReport = By.linkText("Справка по проведению инспекционных проверок жилищного фонда за период (на субъект)");
+    By registryRequirementsReport = By.linkText("Реестр предписаний");
+    By planOfScheduledInspectionsReport = By.linkText("Выполнение плана проведения плановых проверок");
+    By dataForNonRoutineInspectionsReport = By.linkText("Данные по внеплановым проверкам");
+    By dataForPlannedInspectionsReport = By.linkText("Данные по плановым проверкам");
+    By appealsToTheProsecutorReport = By.linkText("Отчет по обращениям подразделений в прокуратуру для согласования проведения внеплановых проверок ЮЛ");
+    By dataGZHIWorkReport = By.linkText("Сведения о работе Государственной жилищной инспекции города Москвы");
 
     //=======Меню юридическое управление========
     By jurReports = By.linkText("Юридическое управление");
