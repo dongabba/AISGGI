@@ -4,9 +4,28 @@
 		<parameter name="username" value="ggi_insp" />
 		<parameter name="password" value="ggi_insp" />
 		<parameter name="role" value="АИС «Инспектор»" />
-		<test name = "JournalsTestInspectorRole">
+	<!--
+	<test name = "JournalsTests_InspectorRole">
 			<classes>
 				<class name="ru.fors.tests.JournalsTests"/>
+			</classes>
+		</test>
+
+		<test name = "FinControlTests_InspectorRole">
+			<classes>
+				<class name="ru.fors.tests.FinControlTests"/>
+			</classes>
+		</test>
+
+		<test name = "DocsSearchTests_InspectorRole">
+			<classes>
+				<class name="ru.fors.tests.DocsSearchTests"/>
+			</classes>
+		</test>
+		-->
+		<test name = "InspectionsPlanTests_InspectorRole">
+			<classes>
+				<class name="ru.fors.tests.InspectionsPlanTests"/>
 			</classes>
 		</test>
 </suite>

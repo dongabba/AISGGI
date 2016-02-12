@@ -183,5 +183,54 @@ public class MainMenu extends Page {
         return new JournalsPage(driver);
     }
 
+    //Начисления
+    @Step("Переходим на страницу \"Финансовый контроль\" -> \"Начисления\"")
+    public FinControlPage userGoToProfitPage(){
+        clickOn2Link(finControlLink, profit);
+        return new FinControlPage(driver);
+    }
+
+    //Платежи
+    @Step("Переходим на страницу \"Финансовый контроль\" -> \"Платежи\"")
+    public FinControlPage userGoToPaymentsPage(){
+        clickOn2Link(finControlLink, payments);
+        return new FinControlPage(driver);
+    }
+
+    //Заявки на возврат
+    @Step("Переходим на страницу \"Финансовый контроль\" -> \"Заявки на возврат\"")
+    public FinControlPage userGoToApplicationsForRefundPage(){
+        clickOn2Link(finControlLink, applicationsForRefund);
+        return new FinControlPage(driver);
+    }
+
+    //Связывание начислений и платежей
+    @Step("Переходим на страницу \"Финансовый контроль\" -> \"Связывание начислений и платежей\"")
+    public FinControlPage userGoToProfitAndPaymentsPage(){
+        clickOn2Link(finControlLink, profitAndpaymentsLink);
+        return new FinControlPage(driver);
+    }
+
+    //Финансовые показатели
+    @Step("Переходим на страницу \"Финансовый контроль\" -> \"Финансовые показатели\"")
+    public FinControlPage userGoToFinancePage(){
+        clickOn2Link(finControlLink, finance);
+        return new FinControlPage(driver);
+    }
+
+    //Поиск документов
+    @Step("Переходим на страницу \"Поиск документов\"")
+    public DocsSearchPage userGoToDocsSearchPage(){
+        click(docsSearch);
+        return new DocsSearchPage(driver);
+    }
+
+    //План проверок ЮЛ/ИП
+    @Step("Переходим на страницу \"План проведения проверок\"")
+    public InspectionsPlanPage userGoToJurAndIpPlanPage(){
+        click(inspectionsPlanLink);
+        return new InspectionsPlanPage(driver);
+    }
+
 
 }

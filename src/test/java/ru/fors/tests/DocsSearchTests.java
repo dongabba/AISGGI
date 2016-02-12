@@ -1,0 +1,39 @@
+package ru.fors.tests;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import ru.fors.pages.DocsSearchPage;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+
+import static org.junit.Assert.assertTrue;
+
+/**
+ * Created by Alexander Zhaleyko on 12.02.2016.
+ */
+public class DocsSearchTests extends TestBase{
+    @BeforeMethod
+    @Parameters({"username", "password"})
+    public void testStatus(String username, String password){
+        if (driver == null){
+            init();
+            userLogin(username, password);
+        } if (driver.getTitle().equals("Главное управление «Государственная жилищная инспекция Московской области» - вход")){
+            userLogin(username, password);
+        }
+    }
+
+    @Features("Поиск документов")
+    @Stories("Поиск со значениями по умолчанию")
+    @Test
+    public void docsSearchTest() throws InterruptedException {
+        System.out.println("Start: docsSearchTest");
+        DocsSearchPage docsSearchPage = new DocsSearchPage(driver);
+        docsSearchPage.userGoToDocsSearchPage();
+        docsSearchPage.waitForDocsSearchPageLoaded();
+        docsSearchPage.userFormedPage();
+        assertTrue("Данные не сформировались за 1 минуту", docsSearchPage.isPageDocsSearchFormed());
+        System.out.println("Finish: docsSearchTest");
+    }
+}
