@@ -16,6 +16,7 @@ public class NsiForms extends Page{
     By findSubjectButton = By.linkText("Искать");
     By firstSearchResultInAddSubjectWindow = By.xpath("//div[@class='nsi-result-find']//td[2]");
     By selectButton = By.xpath("//div[@class='nsi-buttons-panel']//span[text()='Выбрать']");
+    By easySearchTab = By.linkText("Простой поиск");
 
     public void userSelectSubject(String name){
         wait.until(ExpectedConditions.presenceOfElementLocated(addSubjectWindowTitle));
@@ -33,5 +34,10 @@ public class NsiForms extends Page{
                 i=i+1;
             }
         }
+    }
+
+    public void userGoToEasySearchTab(){
+        click(easySearchTab);
+        wait.until(ExpectedConditions.presenceOfElementLocated(subjectName));
     }
 }

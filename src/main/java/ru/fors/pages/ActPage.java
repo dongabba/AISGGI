@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import ru.yandex.qatools.allure.annotations.Step;
 
 
 /**
@@ -67,7 +68,7 @@ public class ActPage extends Page {
 
     public void userSetDocDate(String date){
         DatePicker dp = new DatePicker(driver);
-        dp.userSetDate(By.xpath("//form/div[@class='act-panel']//div[@class='act-panel__line clearfix'][4]//img"), By.className("calheader"), By.className("calnavright"), By.className("calnavleft"), By.cssSelector(".m1"), date);
+        dp.userSetDate(By.xpath("//form/div[@class='act-panel']//div[@class='act-panel__line clearfix'][4]//img"), By.className("calheader"), By.className("calnavright"), By.className("calnavleft"), By.cssSelector(".calbody"), date);
 
     }
 
@@ -87,7 +88,7 @@ public class ActPage extends Page {
 
     public void userSetStartCheckDate(String date) throws InterruptedException {
         DatePicker dp = new DatePicker(driver);
-        dp.userSetDate(By.xpath("//div[@id='tab2']//div[@class='act-panel']//td[1]//img"), By.xpath("//div[@id='tab2']//td[1]//div[@class='calheader']"), By.className("calnavright"), By.className("calnavleft"), By.xpath(".//div[@id='tab2']//div[@class='act-panel']//td[1]//tbody"), date);
+        dp.userSetDate(By.xpath("//div[@id='tab2']//div[@class='act-panel']//td[1]//img"), By.xpath("//div[@id='tab2']//td[1]//div[@class='calheader']"), By.className("//div[@id='tab2']//td[1]//div[@class='calnavright']"), By.className("//div[@id='tab2']//td[1]//div[@class='calnavleft']"), By.xpath(".//div[@id='tab2']//div[@class='act-panel']//td[1]//tbody"), date);
     }
 
     public void userSetStartCheckHours(String hours) throws InterruptedException {
@@ -104,7 +105,7 @@ public class ActPage extends Page {
 
     public void userSetFinishCheckDate(String date){
         DatePicker dp = new DatePicker(driver);
-        dp.userSetDate(By.xpath("//div[@id='tab2']//div[@class='act-panel']//td[2]//img"), By.xpath("//div[@id='tab2']//td[2]//div[@class='calheader']"), By.className("calnavright"), By.className("calnavleft"), By.xpath("//div[@id='tab2']//div[@class='act-panel']//td[2]//tbody"), date);
+        dp.userSetDate(By.xpath("//div[@id='tab2']//div[@class='act-panel']//td[2]//img"), By.xpath("//div[@id='tab2']//td[2]//div[@class='calheader']"), By.xpath("//div[@id='tab2']//td[2]//div[@class='calnavright']"), By.className("//div[@id='tab2']//td[2]//div[@class='calnavleft']"), By.xpath("//div[@id='tab2']//div[@class='act-panel']//td[2]//tbody"), date);
     }
 
     public void userSetFinishCheckHours(String hours) throws InterruptedException {
@@ -181,6 +182,12 @@ public class ActPage extends Page {
         nsiForms.userSelectSubject(name);
     }
 
+    public void addSubject2(String name){
+        NsiForms nsiForms = new NsiForms(driver);
+        nsiForms.userGoToEasySearchTab();
+        nsiForms.userSelectSubject(name);
+    }
+
     public void userAddAct(String docDate,
                            String docHours,
                            String docMinutes,
@@ -219,5 +226,14 @@ public class ActPage extends Page {
         click(oneDocPrescription);
         click(saveViolationButton);
         return new PrescriptionPage(driver);
+    }
+
+    public void waitForActCheckOrder2PageOpen(){
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h3[text()='Акт проверки исполнения предписания']")));
+    }
+
+    @Step("Пользователь создает акт проверки исполнения предписания")
+    public void userAddActChekOrder2(String name){
+        addSubject2(name);
     }
 }

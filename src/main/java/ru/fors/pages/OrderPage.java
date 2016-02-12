@@ -2,6 +2,7 @@ package ru.fors.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import ru.yandex.qatools.allure.annotations.Step;
@@ -50,6 +51,7 @@ public class OrderPage extends Page{
 
     //===================================
     By createActButton = By.linkText("Акт проверки");
+    By createAckCheckOrder2 = By.linkText("Акт проверки исполнения предписания");
 
 
     //Дата документа
@@ -57,7 +59,7 @@ public class OrderPage extends Page{
     By calheader = By.className("calheader");
     By prevMonthButton = By.className("calnavleft");
     By nextMonthButton = By.className("calnavright");
-    By calendar = By.cssSelector(".m1");
+    By calendar = By.cssSelector(".calbody");
 
     public void waitForOrderPageLoaded(){
         wait.until(ExpectedConditions.presenceOfElementLocated(pageTitle));
@@ -142,7 +144,7 @@ public class OrderPage extends Page{
 
     public void userSetDate1(String date){
         DatePicker dp = new DatePicker(driver);
-        dp.userSetDate(By.xpath("//form/div[@class='act-panel']/div[@class='act-panel__line clearfix'][3]//img"), By.className("calheader"), By.className("calnavright"), By.className("calnavleft"), By.cssSelector(".m1"), date);
+        dp.userSetDate(By.xpath("//form/div[@class='act-panel']/div[@class='act-panel__line clearfix'][3]//img"), By.className("calheader"), By.className("calnavright"), By.className("calnavleft"), By.cssSelector(".calbody"), date);
     }
 
     @Step("Выбираем исполнителя")
@@ -241,5 +243,11 @@ public class OrderPage extends Page{
         userSetPreparerOrder2(preparer);
         userSaveOrder();
         return orderNumb;
+    }
+
+    @Step("Пользователь открывает страницу создания акта проверки исполнения предписания")
+    public ActPage userOpenActCheckOrder2CreatePage(){
+        clickOn2Link(createDocButton, createAckCheckOrder2);
+        return new ActPage(driver);
     }
 }

@@ -57,7 +57,7 @@ public class DatePicker extends Page{
 
     private void selectDate(String expDate, By calendar) {
         datePicker = driver.findElement(calendar);
-        noOfColumns = datePicker.findElements(By.tagName("td"));
+        noOfColumns = datePicker.findElements(By.cssSelector("td[class*='selectable']"));
 
         for (WebElement cell : noOfColumns){
             System.out.println(cell.getText());
