@@ -45,6 +45,7 @@ public class ReportsPage extends MainMenu{
     By dateFromField = By.cssSelector("input[name='dateInterval:from:date']");
     By dateToField = By.cssSelector("input[name='dateInterval:to:date']");
     By buildButton = By.xpath("//button[text()='Сформировать']");
+    By buildButton2 = By.cssSelector("button[class*='left']");
 
     public ReportsPage waitForReportLoaded(By element){
         wait.until(ExpectedConditions.visibilityOfElementLocated(element));
@@ -62,10 +63,14 @@ public class ReportsPage extends MainMenu{
     public void userBuildReport(){
         click(buildButton);
     }
+    @Step("Строим отчет")
+    public void userBuildReport2(){
+        click(buildButton2);
+    }
 
     public void userBuildDataOfDocEnteredReport() throws InterruptedException {
         waitForReportLoaded(dataOfDocEnteredReportTitle);
-        userBuildReport();
+        userBuildReport2();
     }
 
     public void userBuildWorkMGIByYearReport() throws InterruptedException {
