@@ -62,24 +62,31 @@ public class MainMenu extends Page {
     By inspReportsPage = By.linkText("Инспекционные");
     By dataOfDocEnteredReport = By.linkText("Данные по введенным в АИС ГЖИ документам, детализированный");
     By workMGIByYearReport = By.linkText("Сведения о работе Государственной жилищной инспекции");
-    By dataOfPrescriptionReport = By.linkText("Данные по предписаниям");
-    By listFormedDocsByAddressReport = By.linkText("Список оформленных документов по адресу");
-    By listCheckActWithoutPrescriptionReport = By.linkText("Список актов, не имеющих предписаний");
-    By inspectionActsReport = By.linkText("Данные по актам осмотра и связанным с ними документам, введенным в ЕИС МЖИ за период");
-    By checkInspectionActsReport = By.linkText("Данные по актам поверки и связанным с ними документам, введенным в ЕИС МЖИ за период");
-    By statisticDataReport = By.linkText("Статистические данные о проведении проверок МЖИ в отношении ЮЛ");
-    By instructionsFizReport = By.linkText("Список распоряжений с истекающим сроком проведения проверки");
-    By subjectRequirementsReport = By.linkText("Список документов, выданных на субъект предписания");
-    By inspectionReferenceReport = By.linkText("Справка по проведению инспекционных проверок жилищного фонда за период (на субъект)");
-    By registryRequirementsReport = By.linkText("Реестр предписаний");
-    By planOfScheduledInspectionsReport = By.linkText("Выполнение плана проведения плановых проверок");
-    By dataForNonRoutineInspectionsReport = By.linkText("Данные по внеплановым проверкам");
-    By dataForPlannedInspectionsReport = By.linkText("Данные по плановым проверкам");
-    By appealsToTheProsecutorReport = By.linkText("Отчет по обращениям подразделений в прокуратуру для согласования проведения внеплановых проверок ЮЛ");
-    By dataGZHIWorkReport = By.linkText("Сведения о работе Государственной жилищной инспекции города Москвы");
+    By facade3Report = By.linkText("Справка о результатах проверки (Формы 3-6)");
+    By forma1Report = By.linkText("Количество многоквартирных домов в которых устранены нарушения указанные в предписаниях ГЖИ МО (Форма 1)");
+    By weeklyRptOnInspEnforcementActivities = By.linkText("Еженедельный отчет о контрольно-надзорной деятельности");
+    By defectsOfHouseElementsReport = By.linkText("Сведения о дефекта конструктивных элементов");
+    By rptFor3And2quartal = By.linkText("Отчет о результатах контрольных мероприятий");
+    By theStatisticOneReport = By.linkText("Приложение №1 (Статистика)");
+    By totalsOfChecksSmallsMediumBusinessReport = By.linkText("Итог_Сводная таблица проверки малого и  среднего бизнеса");
+    By statisticDataMOReport = By.linkText("Отчет в прокуратуру МО");
+    By regionalHousingOversightReport = By.linkText("Информация по осуществлению регионального государственного жилищного надзора");
+    By workGeneralDepartmentMOReport = By.linkText("Отчет о работе Главного управления Московской области ГЖИ МО (Краткий отчет)");
+    By stateHousingControlReport = By.linkText("Государственный жилищный контроль");
+    By outInspectionsForProsecutorsReport = By.linkText("Отчет в прокуратуру МО по выездным проверкам");
+    By forma2Report = By.linkText("Форма 2");
+    By explanatoryNoteReport = By.linkText("Пояснительная записка");
+    By polpredPresidentReport = By.linkText("Отчет полномочному представителю Президента РФ");
 
     //=======Меню юридическое управление========
     By jurReports = By.linkText("Юридическое управление");
+    By journalOfInspectionsControlsReport = By.linkText("Журнал учета проверок");
+    By jurRptByArticle19_5 = By.linkText("Отчет по статье 19.5");
+    By registryComplusionReport = By.linkText("Реестр поданных исковых заявлений и понуждении исполнения предписаний");
+    By registryClaimsForCourtsOfGeneralJurisdictionReport = By.linkText("Реестр исковых заявлений (суды общей юрисдикции)");
+    By registerOfDisqualifiedOfficialsManagingOrganizationsReport = By.linkText("Реестр дисквалифицированных лиц");
+    By jurManagementRegistryOfPrescriptionsReport = By.linkText("Реестр предписаний");
+    By jurManagementRegistryOfPrescriptionsMingosuReport = By.linkText("Реестр предписаний для Мингосуправления МО");
 
     //Журнал распоряжений
     @Step("Переходим на страницу \"Журнал распоряжений\"")
@@ -249,5 +256,180 @@ public class MainMenu extends Page {
         return new InspectionsPlanPage(driver);
     }
 
+    //=====Отчеты=====
+    //Данные по введенным в АИС ГЖИ документам, детализированный
+    @Step("Переходим к отчету \"Данные по введенным в АИС ГЖИ документам, детализированный\"")
+    public ReportsPage userGoToDataOfDocEnteredReport(){
+        clickOn3Link(reportsLink, inspReportsPage, dataOfDocEnteredReport);
+        return new ReportsPage(driver);
 
+    }
+
+    //Сведения о работе Государственной жилищной инспекции
+    @Step("Переходим к отчету \"Сведения о работе Государственной жилищной инспекции\"")
+    public ReportsPage userGoToWorkMGIByYearReport(){
+        clickOn3Link(reportsLink, inspReportsPage, workMGIByYearReport);
+        return new ReportsPage(driver);
+
+    }
+
+    //Справка о результатах проверки (Формы 3-6)
+    @Step("Переходим к отчету \"Справка о результатах проверки (Формы 3-6)\"")
+    public ReportsPage userGoToFacade3Report(){
+        clickOn3Link(reportsLink, inspReportsPage, facade3Report);
+        return new ReportsPage(driver);
+
+    }
+
+    //Количество многоквартирных домов в которых устранены нарушения указанные в предписаниях ГЖИ МО (Форма 1)
+    @Step("Переходим к отчету \"Количество многоквартирных домов в которых устранены нарушения указанные в предписаниях ГЖИ МО (Форма 1)\"")
+    public ReportsPage userGoToForma1Report(){
+        clickOn3Link(reportsLink, inspReportsPage, forma1Report);
+        return new ReportsPage(driver);
+
+    }
+
+    //Еженедельный отчет о контрольно-надзорной деятельности
+    @Step("Переходим к отчету \"Еженедельный отчет о контрольно-надзорной деятельности\"")
+    public ReportsPage userGoToWeeklyRptOnInspEnforcementActivities(){
+        clickOn3Link(reportsLink, inspReportsPage, weeklyRptOnInspEnforcementActivities);
+        return new ReportsPage(driver);
+
+    }
+
+    //Сведения о дефекта конструктивных элементов
+    @Step("Переходим к отчету \"Сведения о дефекта конструктивных элементов\"")
+    public ReportsPage userGoToDefectsOfHouseElementsReport(){
+        clickOn3Link(reportsLink, inspReportsPage, defectsOfHouseElementsReport);
+        return new ReportsPage(driver);
+
+    }
+
+    //Отчет о результатах контрольных мероприятий
+    @Step("Переходим к отчету \"Отчет о результатах контрольных мероприятий\"")
+    public ReportsPage userGoToRptFor3And2quartal(){
+        clickOn3Link(reportsLink, inspReportsPage, rptFor3And2quartal);
+        return new ReportsPage(driver);
+
+    }
+
+    //Приложение №1 (Статистика)
+    @Step("Переходим к отчету \"Приложение №1 (Статистика)\"")
+    public ReportsPage userGoToTheStatisticOneReport(){
+        clickOn3Link(reportsLink, inspReportsPage, theStatisticOneReport);
+        return new ReportsPage(driver);
+
+    }
+
+    //Итог_Сводная таблица проверки малого и  среднего бизнеса
+    @Step("Переходим к отчету \"Итог_Сводная таблица проверки малого и  среднего бизнеса\"")
+    public ReportsPage userGoToTotalsOfChecksSmallsMediumBusinessReport(){
+        clickOn3Link(reportsLink, inspReportsPage, totalsOfChecksSmallsMediumBusinessReport);
+        return new ReportsPage(driver);
+    }
+
+    //Отчет в прокуратуру МО
+    @Step("Переходим к отчету \"Отчет в прокуратуру МО\"")
+    public ReportsPage userGoToStatisticDataMOReport(){
+        clickOn3Link(reportsLink, inspReportsPage, statisticDataMOReport);
+        return new ReportsPage(driver);
+    }
+
+    //Информация по осуществлению регионального государственного жилищного надзора
+    @Step("Переходим к отчету \"Информация по осуществлению регионального государственного жилищного надзора\"")
+    public ReportsPage userGoToRegionalHousingOversightReport(){
+        clickOn3Link(reportsLink, inspReportsPage, regionalHousingOversightReport);
+        return new ReportsPage(driver);
+    }
+
+    //Отчет о работе Главного управления Московской области ГЖИ МО (Краткий отчет)
+    @Step("Переходим к отчету \"Отчет о работе Главного управления Московской области ГЖИ МО (Краткий отчет)\"")
+    public ReportsPage userGoToWorkGeneralDepartmentMOReport(){
+        clickOn3Link(reportsLink, inspReportsPage, workGeneralDepartmentMOReport);
+        return new ReportsPage(driver);
+    }
+
+    //Государственный жилищный контроль
+    @Step("Переходим к отчету \"Государственный жилищный контроль\"")
+    public ReportsPage userGoToStateHousingControlReport(){
+        clickOn3Link(reportsLink, inspReportsPage, stateHousingControlReport);
+        return new ReportsPage(driver);
+    }
+
+    //Отчет в прокуратуру МО по выездным проверкам
+    @Step("Переходим к отчету \"Отчет в прокуратуру МО по выездным проверкам\"")
+    public ReportsPage userGoToOutInspectionsForProsecutorsReport(){
+        clickOn3Link(reportsLink, inspReportsPage, outInspectionsForProsecutorsReport);
+        return new ReportsPage(driver);
+    }
+
+    //Форма 2
+    @Step("Переходим к отчету \"Форма 2\"")
+    public ReportsPage userGoToOutForma2Report(){
+        clickOn3Link(reportsLink, inspReportsPage, forma2Report);
+        return new ReportsPage(driver);
+    }
+
+    //Пояснительная записка
+    @Step("Переходим к отчету \"Пояснительная записка\"")
+    public ReportsPage userGoToOutExplanatoryNoteReport(){
+        clickOn3Link(reportsLink, inspReportsPage, explanatoryNoteReport);
+        return new ReportsPage(driver);
+    }
+
+    //Отчет полномочному представителю Президента РФ
+    @Step("Переходим к отчету \"Отчет полномочному представителю Президента РФ\"")
+    public ReportsPage userGoToPolpredPresidentReport(){
+        clickOn3Link(reportsLink, inspReportsPage, polpredPresidentReport);
+        return new ReportsPage(driver);
+    }
+    //=====Юридическое управление=====
+    //Журнал учета проверок
+    @Step("Переходим к отчету \"Журнал учета проверок\"")
+    public ReportsPage userGoToJournalOfInspectionsControlsReport(){
+        clickOn3Link(reportsLink, jurReports, journalOfInspectionsControlsReport);
+        return new ReportsPage(driver);
+    }
+
+    //Отчет по статье 19.5
+    @Step("Переходим к отчету \"Отчет по статье 19.5\"")
+    public ReportsPage userGoToJurRptByArticle19_5(){
+        clickOn3Link(reportsLink, jurReports, jurRptByArticle19_5);
+        return new ReportsPage(driver);
+    }
+
+    //Реестр поданных исковых заявлений и понуждении исполнения предписаний
+    @Step("Переходим к отчету \"Реестр поданных исковых заявлений и понуждении исполнения предписаний\"")
+    public ReportsPage userGoToRegistryComplusionReport(){
+        clickOn3Link(reportsLink, jurReports, registryComplusionReport);
+        return new ReportsPage(driver);
+    }
+
+    //Реестр исковых заявлений (суды общей юрисдикции)
+    @Step("Переходим к отчету \"Реестр исковых заявлений (суды общей юрисдикции)\"")
+    public ReportsPage userGoToRegistryClaimsForCourtsOfGeneralJurisdictionReport(){
+        clickOn3Link(reportsLink, jurReports, registryClaimsForCourtsOfGeneralJurisdictionReport);
+        return new ReportsPage(driver);
+    }
+
+    //Реестр дисквалифицированных лиц
+    @Step("Переходим к отчету \"Реестр дисквалифицированных лиц\"")
+    public ReportsPage userGoToRegisterOfDisqualifiedOfficialsManagingOrganizationsReport(){
+        clickOn3Link(reportsLink, jurReports, registerOfDisqualifiedOfficialsManagingOrganizationsReport);
+        return new ReportsPage(driver);
+    }
+
+    //Реестр предписаний
+    @Step("Переходим к отчету \"Реестр предписаний\"")
+    public ReportsPage userGoToJurManagementRegistryOfPrescriptionsReport(){
+        clickOn3Link(reportsLink, jurReports, jurManagementRegistryOfPrescriptionsReport);
+        return new ReportsPage(driver);
+    }
+
+    //Реестр предписаний для Мингосуправления МО
+    @Step("Переходим к отчету \"Реестр предписаний для Мингосуправления МО\"")
+    public ReportsPage userGoToJurManagementRegistryOfPrescriptionsMingosuReport(){
+        clickOn3Link(reportsLink, jurReports, jurManagementRegistryOfPrescriptionsMingosuReport);
+        return new ReportsPage(driver);
+    }
 }
