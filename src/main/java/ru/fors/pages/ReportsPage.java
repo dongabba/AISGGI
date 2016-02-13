@@ -2,6 +2,7 @@ package ru.fors.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import ru.fors.utils.PropertyLoader;
 import ru.yandex.qatools.allure.annotations.Step;
@@ -65,7 +66,8 @@ public class ReportsPage extends MainMenu{
     }
     @Step("Строим отчет")
     public void userBuildReport2(){
-        click(buildButton2);
+        Actions actions = new Actions(driver);
+        actions.click(driver.findElement(By.xpath("//button[text()='Сформировать']"))).perform();
     }
 
     public void userBuildDataOfDocEnteredReport() throws InterruptedException {

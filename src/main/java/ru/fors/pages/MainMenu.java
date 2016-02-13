@@ -65,10 +65,10 @@ public class MainMenu extends Page {
     By facade3Report = By.linkText("Справка о результатах проверки (Формы 3-6)");
     By forma1Report = By.linkText("Количество многоквартирных домов в которых устранены нарушения указанные в предписаниях ГЖИ МО (Форма 1)");
     By weeklyRptOnInspEnforcementActivities = By.linkText("Еженедельный отчет о контрольно-надзорной деятельности");
-    By defectsOfHouseElementsReport = By.linkText("Сведения о дефектах конструктивных элементов");
+    By defectsOfHouseElementsReport = By.xpath("//a[contains(.,'дефектах')]");
     By rptFor3And2quartal = By.linkText("Отчет о результатах контрольных мероприятий");
     By theStatisticOneReport = By.linkText("Приложение №1 (Статистика)");
-    By totalsOfChecksSmallsMediumBusinessReport = By.linkText("Итог_Сводная таблица проверки малого и  среднего бизнеса");
+    By totalsOfChecksSmallsMediumBusinessReport = By.xpath("//a[contains(.,'Итог')]");
     By statisticDataMOReport = By.linkText("Отчет в прокуратуру МО");
     By regionalHousingOversightReport = By.linkText("Информация по осуществлению регионального государственного жилищного надзора");
     By workGeneralDepartmentMOReport = By.linkText("Отчет о работе Главного управления Московской области ГЖИ МО (Краткий отчет)");
