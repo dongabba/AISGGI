@@ -12,7 +12,7 @@ public class AdminPage extends MainMenu{
         super(driver);
     }
 
-    By helpInfoPageTitle = By.xpath("h3[text()='Справочная информация']");
+    By helpInfoPageTitle = By.xpath("//h3[text()='Справочная информация']");
     By table = By.xpath("//div[text()='внеплановых проверок']");
 
     public void waitForHelpInfoPageLoaded (){

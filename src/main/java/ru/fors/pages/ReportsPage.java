@@ -19,12 +19,12 @@ public class ReportsPage extends MainMenu{
     By dataOfDocEnteredReportTitle = By.xpath("//h3[text()='Данные по введенным в АИС ГЖИ документам, детализированный']");
     By workMGIByYearReportTitle = By.xpath("//h3[text()='Сведения о работе Государственной жилищной инспекции']");
     By facade3ReportTitle = By.xpath("//h3[text()='Форма 3 (Фасады)']");
-    By forma1ReportTitle = By.xpath("//h3[text()='Количество многоквартирных домов в которых устранены нарушения указанные в предписаниях ГЖИ МО (Форма 1)']");
+    By forma1ReportTitle = By.xpath("//h3[text()='Количество многоквартирных домов в которых  устранены нарушения указанные в предписаниях ГЖИ МО (Форма 1)']");
     By weeklyRptOnInspEnforcementActivitiesTitle = By.xpath("//h3[text()='Еженедельный отчет о контрольно-надзорной деятельности']");
-    By defectsOfHouseElementsReportTitle = By.xpath("//h3[text()='Сведения о дефекта конструктивных элементов']");
+    By defectsOfHouseElementsReportTitle = By.xpath("//h3[text()='Сведения о дефектах конструктивных элементов']");
     By rptFor3And2quartalTitle = By.xpath("//h3[text()='Сводный отчет о результатах контрольных мероприятий']");
     By theStatisticOneReportTitle = By.xpath("//h3[text()='Приложение №1 (Статистика)']");
-    By totalsOfChecksSmallsMediumBusinessReportTitle = By.xpath("//h3[text()='Итог_Сводная таблица проверки малого и  среднего бизнеса']");
+    By totalsOfChecksSmallsMediumBusinessReportTitle = By.xpath("//h3[text()='Итог_Сводная таблица проверки малого и среднего бизнеса']");
     By statisticDataMOReportTitle = By.xpath("//h3[text()='Отчет в прокуратуру МО']");
     By regionalHousingOversightReportTitle = By.xpath("//h3[text()='Информация по осуществлению регионального государственного жилищного надзора']");
     By workGeneralDepartmentMOReportTitle = By.xpath("//h3[text()='Отчет о работе Главного управления Московской области ГЖИ МО (Краткий отчет)']");
@@ -232,7 +232,7 @@ public class ReportsPage extends MainMenu{
 
     @Step("Проверяем наличие файла с отчетом")
     public boolean isDataOfDocEnteredReportFormed()throws InterruptedException {
-        return isReportFormed("specObjectsRptByChecks");
+        return isReportFormed("dataOfDocsEnteredDetailed");
     }
 
     @Step("Проверяем наличие файла с отчетом")
