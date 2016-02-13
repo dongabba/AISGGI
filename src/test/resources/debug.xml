@@ -22,10 +22,21 @@
 				<class name="ru.fors.tests.DocsSearchTests"/>
 			</classes>
 		</test>
-		-->
+
 		<test name = "InspectionsPlanTests_InspectorRole">
 			<classes>
 				<class name="ru.fors.tests.InspectionsPlanTests"/>
+			</classes>
+		</test>
+		-->
+		<test name = "ReportsTests_InspectorRole">
+			<classes>
+				<class name="ru.fors.tests.ReportsTests"/>
+			</classes>
+		</test>
+		<test name = "AdminPageTests_InspectorRole">
+			<classes>
+				<class name="ru.fors.tests.AdminPageTests"/>
 			</classes>
 		</test>
 </suite>

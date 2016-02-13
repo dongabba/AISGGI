@@ -88,6 +88,11 @@ public class MainMenu extends Page {
     By jurManagementRegistryOfPrescriptionsReport = By.linkText("Реестр предписаний");
     By jurManagementRegistryOfPrescriptionsMingosuReport = By.linkText("Реестр предписаний для Мингосуправления МО");
 
+    //=====Меню Администрирование=====
+    By administrationsMenuLink = By.linkText("Администрирование");
+    By helpersLink = By.linkText("Справочники");
+    By helpInfoLink = By.linkText("Справочная информация");
+
     //Журнал распоряжений
     @Step("Переходим на страницу \"Журнал распоряжений\"")
     public JournalsPage userGoToInstructionsJournal(){
@@ -431,5 +436,12 @@ public class MainMenu extends Page {
     public ReportsPage userGoToJurManagementRegistryOfPrescriptionsMingosuReport(){
         clickOn3Link(reportsLink, jurReports, jurManagementRegistryOfPrescriptionsMingosuReport);
         return new ReportsPage(driver);
+    }
+
+    //Справочная информация
+    @Step("Переходина страницу \"Справочная информация\"")
+    public AdminPage userGoToHelpInfoPage(){
+        clickOn3Link(administrationsMenuLink, helpersLink, helpInfoLink);
+        return new AdminPage(driver);
     }
 }
