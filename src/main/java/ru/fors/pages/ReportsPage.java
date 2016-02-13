@@ -67,7 +67,7 @@ public class ReportsPage extends MainMenu{
     @Step("Строим отчет")
     public void userBuildReport2(){
         Actions actions = new Actions(driver);
-        actions.click(driver.findElement(By.xpath("//button[text()='Сформировать']"))).perform();
+        actions.moveToElement(driver.findElement(By.cssSelector("button[class*='left']"))).click().perform();
     }
 
     public void userBuildDataOfDocEnteredReport() throws InterruptedException {
