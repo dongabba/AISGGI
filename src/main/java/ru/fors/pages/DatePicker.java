@@ -36,6 +36,11 @@ public class DatePicker extends Page{
             }
         }
         String expDate = date.substring(0, 2);
+        if (expDate.charAt(0)=='0'){
+            System.out.println("1: "+ expDate.charAt(0));
+            expDate = expDate.substring(1,2);
+            System.out.println("2: "+ expDate);
+        }
         int expMonth = Integer.parseInt(date.substring(3, 5));
         int expYear = Integer.parseInt(date.substring(6, date.length()));
         while (dateNotFound) {
