@@ -164,7 +164,7 @@ public class OrderPage extends Page{
     @Step("Создаем распоряжение")
     public String userCreateOrderP(String date, String user, String userAgainst, String preparer, String address){
         String fullNumb = String.valueOf(random.nextInt(99999));
-        orderNumb = "39ОГ-"+fullNumb+"-1-9-2016";
+        orderNumb = "39ОГ"+fullNumb+"-1-9-2016";
         userSetDate1(date);
         type(fullN, fullNumb);
         userSetSignedBy(user);

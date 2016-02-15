@@ -16,7 +16,8 @@ public class DatePicker extends Page{
     public DatePicker(WebDriver driver) {
         super(driver);
     }
-    List<String> monthList = Arrays.asList("Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь");
+    List<String> monthListRu = Arrays.asList("Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь");
+    List<String> monthListEn = Arrays.asList("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
     boolean dateNotFound;
     WebElement datePicker;
     List<WebElement> noOfColumns;
@@ -45,17 +46,29 @@ public class DatePicker extends Page{
         int expYear = Integer.parseInt(date.substring(6, date.length()));
         while (dateNotFound) {
 
-            calMonth = getElementText(calheader).substring(getElementText(calheader).indexOf("\n")+1, getElementText(calheader).indexOf(" ",getElementText(calheader).indexOf("\n")));
+            calMonth = getElementText(calheader).substring(getElementText(calheader).indexOf("\n") + 1, getElementText(calheader).indexOf(" ", getElementText(calheader).indexOf("\n")));
             System.out.println("calMonth: " + calMonth);
-            calYear = (getElementText(calheader).substring(getElementText(calheader).indexOf(" ", getElementText(calheader).indexOf("\n"))+1, getElementText(calheader).indexOf(" ", getElementText(calheader).indexOf("\n"))+5));
+            String monthLetter = calMonth.substring(0, 1);
+            calYear = (getElementText(calheader).substring(getElementText(calheader).indexOf(" ", getElementText(calheader).indexOf("\n")) + 1, getElementText(calheader).indexOf(" ", getElementText(calheader).indexOf("\n")) + 5));
             System.out.println("calYear: " + calYear);
-            if (monthList.indexOf(calMonth) + 1 == expMonth && (expYear == Integer.parseInt(calYear))) {
-                selectDate(expDate, calendar);
-                dateNotFound = false;
-            } else if (monthList.indexOf(calMonth) + 1 < expMonth && (expYear == Integer.parseInt(calYear))) {
-                click(nextMonthButton);
-            } else if (monthList.indexOf(calMonth) + 1 > expMonth && (expYear == Integer.parseInt(calYear))) {
-                click(prevMonthButton);
+            if ("JFMASOND".contains(monthLetter)) {
+                if (monthListEn.indexOf(calMonth) + 1 == expMonth && (expYear == Integer.parseInt(calYear))) {
+                    selectDate(expDate, calendar);
+                    dateNotFound = false;
+                } else if (monthListEn.indexOf(calMonth) + 1 < expMonth && (expYear == Integer.parseInt(calYear))) {
+                    click(nextMonthButton);
+                } else if (monthListEn.indexOf(calMonth) + 1 > expMonth && (expYear == Integer.parseInt(calYear))) {
+                    click(prevMonthButton);
+                }
+            } else {
+                if (monthListRu.indexOf(calMonth) + 1 == expMonth && (expYear == Integer.parseInt(calYear))) {
+                    selectDate(expDate, calendar);
+                    dateNotFound = false;
+                } else if (monthListRu.indexOf(calMonth) + 1 < expMonth && (expYear == Integer.parseInt(calYear))) {
+                    click(nextMonthButton);
+                } else if (monthListRu.indexOf(calMonth) + 1 > expMonth && (expYear == Integer.parseInt(calYear))) {
+                    click(prevMonthButton);
+                }
             }
         }
     }

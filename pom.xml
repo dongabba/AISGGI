@@ -15,6 +15,7 @@
 	  	<url>http://aisggi.fors.ru:8080/ggi-inspection/login?1</url>
 	  	<wait.seconds>60</wait.seconds>
 	  	<windowsDir>C:\\reports</windowsDir>
+	  	<linuxDir>~/Documents/ggi_reports</linuxDir>
    </properties>
 
 	<dependencies>
@@ -140,12 +141,22 @@
 		</properties>
 		</profile>
 		<profile>
-			<id>debug</id>
+			<id>debug_chrome</id>
 			<properties>
 				<site.url>${url}</site.url>
 				<imp.wait>${wait.seconds}</imp.wait>
 				<browser.name>chrome</browser.name>
 				<downloadDir>${windowsDir}</downloadDir>
+				<suites>debug</suites>
+			</properties>
+		</profile>
+		<profile>
+			<id>debug_ff</id>
+			<properties>
+				<site.url>${url}</site.url>
+				<imp.wait>${wait.seconds}</imp.wait>
+				<browser.name>firefox</browser.name>
+				<downloadDir>${linuxDir}</downloadDir>
 				<suites>debug</suites>
 			</properties>
 		</profile>
