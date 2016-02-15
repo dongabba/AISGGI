@@ -177,6 +177,7 @@ public class JournalsTests extends TestBase{
         System.out.println("Finish: claimJournalTest");
     }
 
+    /*
     @Features("Журналы и реестры")
     @Stories("Журнал Реестры решений")
     @Test
@@ -189,7 +190,9 @@ public class JournalsTests extends TestBase{
         assertTrue("Журнал не сформировался или в нем нет данных", journalsPage.isRegistryOfDecisionsJournalFormed());
         System.out.println("Finish: registryOfDecisionsJournalTest");
     }
+    */
 
+    /*
     @Features("Журналы и реестры")
     @Stories("Журнал Дел об АП, поступивших по подведомственности")
     @Test
@@ -202,6 +205,7 @@ public class JournalsTests extends TestBase{
         assertTrue("Журнал не сформировался или в нем нет данных", journalsPage.isRegistryOfDealJournalFormed());
         System.out.println("Finish: registryOfDealJournalTest");
     }
+    */
 
     @Features("Журналы и реестры")
     @Stories("Журнал уведомлений о составлении протокола")
@@ -229,6 +233,7 @@ public class JournalsTests extends TestBase{
         System.out.println("Finish: registryJournalTest");
     }
 
+    /*
     @Features("Журналы и реестры")
     @Stories("Журнал обращений")
     @Test
@@ -241,6 +246,7 @@ public class JournalsTests extends TestBase{
         assertTrue("Журнал не сформировался или в нем нет данных", journalsPage.isReferencesJournalFormed());
         System.out.println("Finish: referencesJournalTest");
     }
+    */
 
     @Features("Журналы и реестры")
     @Stories("Журнал сопроводительных писем в суд")

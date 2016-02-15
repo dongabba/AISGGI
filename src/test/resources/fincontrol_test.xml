@@ -15,6 +15,9 @@
 				<exclude name="claimJournalTest"/>
 				<exclude name="referencesJournalTest"/>
 				<exclude name="registryJournalTest"/>
+				<exclude name="apDealJournalTest"/>
+				<exclude name="prescriptionsJournalTest"/>
+				<exclude name="protocolsJournalTest"/>
 			</methods>
 		</classes>
 	</test>
