@@ -42,6 +42,16 @@ public class ReportsTests extends TestBase {
     }
 
     @Features("Отчеты")
+    @Stories("Отчет \"Данные по документам, введенным в АИС ГЖИ\"")
+    @Test
+    public void dataOfDocEnteredReport2Test() throws InterruptedException {
+        ReportsPage reportsPage = new ReportsPage(driver);
+        reportsPage.userGoToDataOfDocEnteredReport2();
+        reportsPage.userBuildDataOfDocEnteredReport2(dateFormat.format(dateFrom), dateFormat.format(dateTo));
+        assertTrue("Файл с отчетом не сформировался за 1 минуту", reportsPage.isDataOfDocEnteredReport2Formed());
+    }
+
+    @Features("Отчеты")
     @Stories("Отчет \"Данные по введенным в АИС ГЖИ документам, детализированный\"")
     @Test
     public void dataOfDocEnteredReportTest() throws InterruptedException {

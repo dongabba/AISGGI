@@ -1,42 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="roleInspTests">
-	<parameter name="username" value="ggi_insp" />
-	<parameter name="password" value="ggi_insp" />
-	<parameter name="role" value="АИС «Инспектор»" />
-	<test name = "JournalsTests_InspectorRole">
+<suite name="roleFCTests">
+	<parameter name="username" value="laptev_obu" />
+	<parameter name="password" value="laptev_obu" />
+	<parameter name="role" value="АИС «Финансовый контроль»" />
+	<test name = "JournalsTests_FCRole">
 		<classes>
 			<class name="ru.fors.tests.JournalsTests"/>
 			<methods>
+				<exclude name="eventsJournalTest"/>
 				<exclude name="registryOfDecisionsJournalTest"/>
 				<exclude name="registryOfDealJournalTest"/>
+				<exclude name="adjunctJournalTest"/>
+				<exclude name="claimJournalTest"/>
+				<exclude name="referencesJournalTest"/>
+				<exclude name="registryJournalTest"/>
 			</methods>
 		</classes>
 	</test>
-	<test name = "FinControlTests_InspectorRole">
+	<test name = "FinControlTests_FCRole">
 		<classes>
 			<class name="ru.fors.tests.FinControlTests"/>
 		</classes>
 	</test>
-	<test name = "DocsSearchTests_InspectorRole">
+	<test name = "DocsSearchTests_FCRole">
 		<classes>
 			<class name="ru.fors.tests.DocsSearchTests"/>
 		</classes>
 	</test>
-	<test name = "InspectionsPlanTests_InspectorRole">
-		<classes>
-			<class name="ru.fors.tests.InspectionsPlanTests"/>
-		</classes>
-	</test>
-	<test name = "ReportsTests_InspectorRole">
+	<test name = "ReportsTests_FCRole">
 		<classes>
 			<class name="ru.fors.tests.ReportsTests"/>
 			<methods>
+				<exclude name="explanatoryNoteReportTest"/>
 				<exclude name="dataOfDocEnteredReport2Test"/>
+				<exclude name="polpredPresidentReportTest"/>
 			</methods>
 		</classes>
 	</test>
-	<test name = "AdminPageTests_InspectorRole">
+	<test name = "AdminPageTests_FCRole">
 		<classes>
 			<class name="ru.fors.tests.AdminPageTests"/>
 		</classes>

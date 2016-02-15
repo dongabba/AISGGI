@@ -34,6 +34,8 @@ public class MainMenu extends Page {
     By notificationAboutProtocolJournal = By.linkText("Журнал уведомлений о составлении протокола");
     By lettersToCourtJournal = By.linkText("Журнал сопроводительных писем в суд");
     By lettersToSSPJournal = By.linkText("Журнал сопроводительных писем в ССП");
+    By registryOfDecision = By.linkText("Журнал Реестры решений");
+    By registryOfDeal = By.linkText("Журнал дел, поступивших по подведомственности");
 
     //=======Журнал реестров=======
     By registryJournal = By.linkText("Журнал реестров");
@@ -77,6 +79,7 @@ public class MainMenu extends Page {
     By forma2Report = By.linkText("Форма 2");
     By explanatoryNoteReport = By.linkText("Пояснительная записка");
     By polpredPresidentReport = By.linkText("Отчет полномочному представителю Президента РФ");
+    By dataOfDocEnteredReport2 = By.linkText("Данные по документам, введенным в АИС ГЖИ");
 
     //=======Меню юридическое управление========
     By jurReports = By.linkText("Юридическое управление");
@@ -177,6 +180,22 @@ public class MainMenu extends Page {
         return new JournalsPage(driver);
     }
 
+    //Журнал Реестры решений
+    @Step("Переходим на страницу \"Журнал Реестры решений\"")
+    public JournalsPage userGoToRegistryOfDecisionsJournals(){
+        clickOn3Link(journalsAnrRegistryLink, adminPracticsLink, registryOfDecision);
+        return new JournalsPage(driver);
+    }
+
+    //Журнал дел, поступивших по подведомственности
+    @Step("Переходим на страницу \"Журнал дел, поступивших по подведомственности\"")
+    public JournalsPage userGoToRegistryOfDealJournal(){
+        clickOn3Link(journalsAnrRegistryLink, adminPracticsLink, registryOfDeal);
+        return new JournalsPage(driver);
+    }
+
+
+
     //Журнал уведомлений о составлении протокола
     @Step("Переходим на страницу \"Журнал уведомлений о составлении протокола\"")
     public JournalsPage userGoToNotificationAboutProtocolJournal(){
@@ -266,6 +285,14 @@ public class MainMenu extends Page {
     @Step("Переходим к отчету \"Данные по введенным в АИС ГЖИ документам, детализированный\"")
     public ReportsPage userGoToDataOfDocEnteredReport(){
         clickOn3Link(reportsLink, inspReportsPage, dataOfDocEnteredReport);
+        return new ReportsPage(driver);
+
+    }
+
+    //Данные по введенным в АИС ГЖИ документам
+    @Step("Переходим к отчету \"Данные по введенным в АИС ГЖИ документам\"")
+    public ReportsPage userGoToDataOfDocEnteredReport2(){
+        clickOn3Link(reportsLink, inspReportsPage, dataOfDocEnteredReport2);
         return new ReportsPage(driver);
 
     }

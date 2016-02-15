@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="roleBigBossTests">
+	<parameter name="username" value="kochetkovana_bigboss" />
+	<parameter name="password" value="kochetkovana_bigboss" />
+	<parameter name="role" value="АИС «Руководитель»" />
+	<test name = "JournalsTests_BossRole">
+		<classes>
+			<class name="ru.fors.tests.JournalsTests"/>
+		</classes>
+	</test>
+	<test name = "FinControlTests_BossRole">
+		<classes>
+			<class name="ru.fors.tests.FinControlTests"/>
+		</classes>
+	</test>
+	<test name = "DocsSearchTests_BossRole">
+		<classes>
+			<class name="ru.fors.tests.DocsSearchTests"/>
+		</classes>
+	</test>
+	<test name = "InspectionsPlanTests_BossRole">
+		<classes>
+			<class name="ru.fors.tests.InspectionsPlanTests"/>
+		</classes>
+	</test>
+	<test name = "ReportsTests_BossRole">
+		<classes>
+			<class name="ru.fors.tests.ReportsTests"/>
+			<methods>
+				<exclude name="polpredPresidentReportTest"/>
+			</methods>
+		</classes>
+	</test>
+	<test name = "AdminPageTests_BossRole">
+		<classes>
+			<class name="ru.fors.tests.AdminPageTests"/>
+		</classes>
+	</test>
+</suite>

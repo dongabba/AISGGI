@@ -32,6 +32,8 @@ public class JournalsPage extends MainMenu{
     By notificationAboutProtocolJournalTitle = By.xpath("//h3[text()='Уведомления о составлении протокола']");
     By lettersToCourtJournalTitle = By.xpath("//h3[text()='Журнал сопроводительных писем в суд']");
     By lettersToSSPJournalTitle = By.xpath("//h3[text()='Сопроводительное письмо в ССП']");
+    By registryOfDecisionTitle = By.xpath("//h3[text()='Реестры']");
+    By registryOfDealTitle = By.xpath("//h3[text()='Дела об АП, поступившие по подведомственности']");
 
     By registryJournalTitle = By.xpath("//h3[text()='Реестры']");
     By referencesJournalTitle = By.xpath("//h3[text()='Обращения']");
@@ -140,6 +142,14 @@ public class JournalsPage extends MainMenu{
         wait.until(ExpectedConditions.visibilityOfElementLocated(lettersToSSPJournalTitle));
     }
 
+    public void waitForPageRegistryOfDecisionsJournalLoaded (){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(registryOfDecisionTitle));
+    }
+
+    public void waitForPageRegistryOfDealJournalLoaded (){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(registryOfDealTitle));
+    }
+
     //=====Формирование административных журналов
     @Step("Проверяем, сформировался ли журнал протоколов")
     public boolean isProtocolsJournalFormed(){
@@ -178,6 +188,16 @@ public class JournalsPage extends MainMenu{
 
     @Step("Проверяем, сформировался ли журнал сопроводительных писем в ССП")
     public boolean isLettersToSSPJournalFormed(){
+        return isJournalFormed(tableWithResultInAdmPractice);
+    }
+
+    @Step("Проверяем, сформировался ли журнал реестры решений")
+    public boolean isRegistryOfDecisionsJournalFormed(){
+        return isJournalFormed(tableWithResultInAdmPractice);
+    }
+
+    @Step("Проверяем, сформировался ли журнал дел об АП, поступивших по подведомственности")
+    public boolean isRegistryOfDealJournalFormed(){
         return isJournalFormed(tableWithResultInAdmPractice);
     }
 

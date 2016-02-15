@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="roleOAPTests">
+	<parameter name="username" value="ggi_oap" />
+	<parameter name="password" value="ggi_oap" />
+	<parameter name="role" value="АИС «Специалист ОАП»" />
+	<test name = "JournalsTests_OAPRole">
+		<classes>
+			<class name="ru.fors.tests.JournalsTests"/>
+			<methods>
+				<exclude name="eventsJournalTest"/>
+				<exclude name="referencesJournalTest"/>
+			</methods>
+		</classes>
+	</test>
+	<test name = "FinControlTests_OAPRole">
+		<classes>
+			<class name="ru.fors.tests.FinControlTests"/>
+		</classes>
+	</test>
+	<test name = "DocsSearchTests_OAPRole">
+		<classes>
+			<class name="ru.fors.tests.DocsSearchTests"/>
+		</classes>
+	</test>
+	<test name = "ReportsTests_OAPRole">
+		<classes>
+			<class name="ru.fors.tests.ReportsTests"/>
+			<methods>
+				<exclude name="explanatoryNoteReportTest"/>
+				<exclude name="dataOfDocEnteredReport2Test"/>
+			</methods>
+		</classes>
+	</test>
+	<test name = "AdminPageTests_OAPRole">
+		<classes>
+			<class name="ru.fors.tests.AdminPageTests"/>
+		</classes>
+	</test>
+</suite>

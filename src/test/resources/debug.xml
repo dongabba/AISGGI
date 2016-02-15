@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="roleCustomerTests_test">
-		<parameter name="username" value="ggi_insp" />
-		<parameter name="password" value="ggi_insp" />
-		<parameter name="role" value="АИС «Инспектор»" />
-	<!--
+	<parameter name="username" value="ggi_insp" />
+	<parameter name="password" value="ggi_insp" />
+	<parameter name="role" value="АИС «Инспектор»" />
+
 	<test name = "JournalsTests_InspectorRole">
 			<classes>
-				<class name="ru.fors.tests.JournalsTests"/>
+				<class name="ru.fors.tests.CreateOrderTests"/>
 			</classes>
 		</test>
-
+	<!--
 		<test name = "FinControlTests_InspectorRole">
 			<classes>
 				<class name="ru.fors.tests.FinControlTests"/>
@@ -28,15 +28,19 @@
 				<class name="ru.fors.tests.InspectionsPlanTests"/>
 			</classes>
 		</test>
-		-->
 		<test name = "ReportsTests_InspectorRole">
 			<classes>
 				<class name="ru.fors.tests.ReportsTests"/>
+				<methods>
+					<exclude name =".*"  />
+					<include name = "forma1ReportTest" />
+				</methods>
 			</classes>
 		</test>
-		<test name = "AdminPageTests_InspectorRole">
+	<test name = "AdminPageTests_InspectorRole">
 			<classes>
 				<class name="ru.fors.tests.AdminPageTests"/>
 			</classes>
 		</test>
+		-->
 </suite>

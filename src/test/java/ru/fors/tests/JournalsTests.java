@@ -176,6 +176,33 @@ public class JournalsTests extends TestBase{
         assertTrue("Журнал не сформировался или в нем нет данных", journalsPage.isClaimJournalFormed());
         System.out.println("Finish: claimJournalTest");
     }
+
+    @Features("Журналы и реестры")
+    @Stories("Журнал Реестры решений")
+    @Test
+    public void registryOfDecisionsJournalTest() throws InterruptedException {
+        System.out.println("Start: registryOfDecisionsJournalTest");
+        JournalsPage journalsPage = new JournalsPage(driver);
+        journalsPage.userGoToRegistryOfDecisionsJournals();
+        journalsPage.waitForPageRegistryOfDecisionsJournalLoaded();
+        journalsPage.userFormedJournal();
+        assertTrue("Журнал не сформировался или в нем нет данных", journalsPage.isRegistryOfDecisionsJournalFormed());
+        System.out.println("Finish: registryOfDecisionsJournalTest");
+    }
+
+    @Features("Журналы и реестры")
+    @Stories("Журнал Дел об АП, поступивших по подведомственности")
+    @Test
+    public void registryOfDealJournalTest() throws InterruptedException {
+        System.out.println("Start: registryOfDealJournalTest");
+        JournalsPage journalsPage = new JournalsPage(driver);
+        journalsPage.userGoToRegistryOfDealJournal();
+        journalsPage.waitForPageRegistryOfDealJournalLoaded();
+        journalsPage.userFormedJournal();
+        assertTrue("Журнал не сформировался или в нем нет данных", journalsPage.isRegistryOfDealJournalFormed());
+        System.out.println("Finish: registryOfDealJournalTest");
+    }
+
     @Features("Журналы и реестры")
     @Stories("Журнал уведомлений о составлении протокола")
     @Test

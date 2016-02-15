@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import ru.fors.utils.PropertyLoader;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -34,6 +35,7 @@ public class ReportsPage extends MainMenu{
     By forma2ReportTitle = By.xpath("//h3[text()='Форма 2']");
     By explanatoryNoteReportTitle = By.xpath("//h3[text()='Пояснительная записка']");
     By polpredPresidentReportTitle = By.xpath("//h3[text()='Отчет полномочному представителю Президента РФ']");
+    By dataOfDocEnteredReport2Title = By.xpath("//h3[text()='Данные по документам, введенным в АИС ГЖИ']");
 
 
     By journalOfInspectionsControlsReportTitle = By.xpath("//h3[text()='Журнал учета проверок']");
@@ -47,6 +49,7 @@ public class ReportsPage extends MainMenu{
     By dateToField = By.cssSelector("input[name='dateInterval:to:date']");
     By buildButton = By.xpath("//button[text()='Сформировать']");
     By buildButton2 = By.cssSelector("button[class*='left']");
+    By numTO = By.cssSelector("select[name*='numTO']");
 
     public ReportsPage waitForReportLoaded(By element){
         wait.until(ExpectedConditions.visibilityOfElementLocated(element));
@@ -75,6 +78,13 @@ public class ReportsPage extends MainMenu{
         userBuildReport2();
     }
 
+    public void userBuildDataOfDocEnteredReport2(String dateFrom, String dateTo) throws InterruptedException {
+        waitForReportLoaded(dataOfDocEnteredReport2Title);
+        userSetDataFrom(dateFrom);
+        userSetDataTo(dateTo);
+        userBuildReport();
+    }
+
     public void userBuildWorkMGIByYearReport() throws InterruptedException {
         waitForReportLoaded(workMGIByYearReportTitle);
         userBuildReport();
@@ -89,6 +99,7 @@ public class ReportsPage extends MainMenu{
         waitForReportLoaded(forma1ReportTitle);
         userSetDataFrom(dateFrom);
         userSetDataTo(dateTo);
+        userSelectNumbTO();
         userBuildReport();
     }
 
@@ -210,6 +221,11 @@ public class ReportsPage extends MainMenu{
         userBuildReport();
     }
 
+    public void userSelectNumbTO(){
+        Select select = new Select(driver.findElement(numTO));
+        select.selectByValue("66");
+    }
+
     public boolean isReportFormed(String reportName) throws InterruptedException {
         File file = new File(PropertyLoader.loadProperty("downloadDir"));
         //System.out.println("This is isReportFormed method. Search files in directory: "+PropertyLoader.loadProperty("downloadDir"));
@@ -240,6 +256,11 @@ public class ReportsPage extends MainMenu{
     @Step("Проверяем наличие файла с отчетом")
     public boolean isDataOfDocEnteredReportFormed()throws InterruptedException {
         return isReportFormed("dataOfDocsEnteredDetailed");
+    }
+
+    @Step("Проверяем наличие файла с отчетом")
+    public boolean isDataOfDocEnteredReport2Formed()throws InterruptedException {
+        return isReportFormed("dataOfDocEnteredInMgi");
     }
 
     @Step("Проверяем наличие файла с отчетом")
