@@ -20,7 +20,7 @@ public class JournalsTests extends TestBase{
         if (driver == null){
             init();
             userLogin(username, password);
-        } if (driver.getTitle().equals("Главное управление «Государственная жилищная инспекция Московской области» - вход")){
+        } if (driver.getTitle().contains("вход")){
             userLogin(username, password);
         }
     }
