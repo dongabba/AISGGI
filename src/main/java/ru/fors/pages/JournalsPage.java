@@ -269,4 +269,6 @@ public class JournalsPage extends MainMenu{
             return false;
         }
     }
+
+
 }

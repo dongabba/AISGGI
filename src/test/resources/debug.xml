@@ -7,7 +7,7 @@
 
 	<test name = "JournalsTests_InspectorRole">
 			<classes>
-				<class name="ru.fors.tests.CreateOrderTests"/>
+				<class name="ru.fors.tests.PrintFormsTests"/>
 			</classes>
 		</test>
 	<!--

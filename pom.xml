@@ -156,7 +156,7 @@
 				<site.url>${url}</site.url>
 				<imp.wait>${wait.seconds}</imp.wait>
 				<browser.name>firefox</browser.name>
-				<downloadDir>${linuxDir}</downloadDir>
+				<downloadDir>${windowsDir}</downloadDir>
 				<suites>debug</suites>
 			</properties>
 		</profile>

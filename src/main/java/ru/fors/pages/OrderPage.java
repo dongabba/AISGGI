@@ -250,4 +250,5 @@ public class OrderPage extends Page{
         clickOn2Link(createDocButton, createAckCheckOrder2);
         return new ActPage(driver);
     }
+
 }
