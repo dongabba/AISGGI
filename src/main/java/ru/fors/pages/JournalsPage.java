@@ -3,6 +3,7 @@ package ru.fors.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import ru.yandex.qatools.allure.annotations.Step;
 
 /**
@@ -22,6 +23,7 @@ public class JournalsPage extends MainMenu{
     By eventsJournalTitle = By.xpath("//h3[text()='Список мероприятий']");
     By claimProsecutorJournalTitle = By.xpath("//h3[text()='Заявления в прокуратуру']");
     By orderNumberSearchField = By.xpath("//div[contains(@class, 'span40')]/div[4]//a"); //поле для поиска по номеру распоряжения
+    By actCreationTypeField = By.cssSelector("select[name='actCreationType']");
 
     //=======Административная практика========
     By protocolsJournalTitle = By.xpath("//h3[text()='Протоколы']");
@@ -268,6 +270,19 @@ public class JournalsPage extends MainMenu{
         } catch (Exception e){
             return false;
         }
+    }
+
+    public void userSetActCreationType(String type){
+        Select select = new Select(driver.findElement(actCreationTypeField));
+        select.selectByValue(type);
+    }
+
+    public void userSetActCreationTypeViewAct(){
+        userSetActCreationType("0");
+    }
+
+    public void userSetActCreationTypeMonitoringAct(){
+        userSetActCreationType("2");
     }
 
 

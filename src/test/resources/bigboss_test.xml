@@ -9,6 +9,14 @@
 			<class name="ru.fors.tests.JournalsTests"/>
 		</classes>
 	</test>
+	<test name = "PrintForms_BossRole">
+		<classes>
+			<class name="ru.fors.tests.PrintFormsTests"/>
+			<methods>
+				<exclude name="printRevokePrescriptionTest"/>
+			</methods>
+		</classes>
+	</test>
 	<test name = "FinControlTests_BossRole">
 		<classes>
 			<class name="ru.fors.tests.FinControlTests"/>

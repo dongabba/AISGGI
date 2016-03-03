@@ -138,6 +138,12 @@ public class Page {
 		action.doubleClick(element).build().perform();
 	}
 
+	public void userSetDate(By element, String date){
+		click(element);
+		driver.findElement(element).clear();
+		type(element, date);
+	}
+
 
 
 

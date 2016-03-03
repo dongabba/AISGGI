@@ -13,6 +13,11 @@
 			</methods>
 		</classes>
 	</test>
+	<test name = "PrintForms_InspRole">
+		<classes>
+			<class name="ru.fors.tests.PrintFormsTests"/>
+		</classes>
+	</test>
 	<test name = "FinControlTests_InspectorRole">
 		<classes>
 			<class name="ru.fors.tests.FinControlTests"/>

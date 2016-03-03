@@ -20,22 +20,26 @@ public class DocumentsPage extends Page {
 
     By prescriptionPageTitle = By.xpath("//h3[text()='Предписание']");
     By viewActsPageTitle = By.xpath("//h3[text()='Акт осмотра']");
+    By monitoringActsPageTitle = By.xpath("//h3[text()='Акт мониторинга']");
     By actPageTitle = By.xpath("//h3[text()='Акт проверки']");
     By orderPageTitle = By.xpath("//h3[text()='Распоряжение']");
     By attachToActPageTitle = By.xpath("//h3[text()='Приложение к акту проверки']");
     By checkActPageTitle = By.xpath("//h3[text()='Акт проверки исполнения предписания']");
     By attachToCheckActPageTitle = By.xpath("//h3[text()='Приложение к акту проверки исполнения предписания']");
     By denyCriminalPageTitle = By.xpath("//h3[text()='Определение об отказе в возбуждении дела']");
+    By revokePrescriptionPageTitle = By.xpath("//h3[text()='Решение об отзыве предписания']");
 
     By printDocumentButton = By.linkText("Печать");
     By printOrderButton = By.linkText("Распоряжения");
     By printViewActButton = By.linkText("Акта осмотра");
+    By printMonitoringActButton = By.linkText("Акта мониторинга");
     By printActButton = By.linkText("Акта проверки");
     By printAttachToActButton = By.linkText("Приложения к акту проверки");
     By printCheckActButton = By.linkText("Акта проверки исполнения предписания");
     By printAttachToCheckActButton = By.linkText("Приложения к акту проверки исполнения предписания");
     By printPrescriptionButton = By.linkText("Предписания");
     By printDenyCriminalButton = By.linkText("Определение об отказе в возбуждении дела");
+    By printRevokePrescriptionButton = By.linkText("Решение об отзыве предписания");
 
     By resultSearchField = By.xpath("//div[@class='table-wrap']//tbody/tr[1]/td[2]");
 
@@ -221,7 +225,7 @@ public class DocumentsPage extends Page {
         return isDocumentPrint("Предписание");
     }
 
-    @Step("Пользователь определение об отказе в возбуждении дела")
+    @Step("Пользователь открывает определение об отказе в возбуждении дела")
     public void userOpenDenyCriminal(){
         userOpenDocument(resultSearchField, denyCriminalPageTitle);
     }
@@ -235,5 +239,36 @@ public class DocumentsPage extends Page {
     @Step("Проверяем наличие печатной формы")
     public boolean isDenyCriminalPrint()throws InterruptedException {
         return isDocumentPrint("refusial_definition");
+    }
+
+    @Step("Пользователь открывает Решение об отзыве предписания")
+    public void userOpenRevokePrescription(){
+        userOpenDocument(resultSearchField, revokePrescriptionPageTitle);
+    }
+
+    @Step("Пользователь печатает Решение об отзыве предписания")
+    public void userPrintRevokePrescription() {
+        userPrintDocument(printRevokePrescriptionButton);
+    }
+
+    @Step("Проверяем наличие печатной формы")
+    public boolean isRevokePrescription()throws InterruptedException {
+        return isDocumentPrint("decision");
+    }
+
+    @Step("Пользователь открывает акт мониторинга")
+    public void userOpenMonitoringAct(){
+        userOpenDocument(resultSearchField, monitoringActsPageTitle);
+    }
+
+    @Step("Пользователь печатает акт мониторинга")
+    public void userPrintMonitoringAct() {
+        userPrintDocument(printMonitoringActButton);
+        userConfirmPrint();
+    }
+
+    @Step("Проверяем наличие печатной формы")
+    public boolean isMonitoringActPrint()throws InterruptedException {
+        return isDocumentPrint("Акт+мониторинга");
     }
 }

@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import ru.fors.pages.DocsSearchPage;
 import ru.fors.pages.DocumentsPage;
 import ru.fors.pages.JournalsPage;
 import ru.yandex.qatools.allure.annotations.Features;
@@ -42,9 +43,9 @@ public class PrintFormsTests extends TestBase {
     }
 
     @Features("Печатные формы")
-    @Stories("Отчет \"Печать распоряжения\"")
+    @Stories("Печать распоряжения")
     @Test
-    public void printOrderTests() throws InterruptedException {
+    public void printOrderTest() throws InterruptedException {
         JournalsPage journalsPage = new JournalsPage(driver);
         journalsPage.userGoToInstructionsJournal();
         journalsPage.waitForPageInstructionsJournalLoaded();
@@ -57,12 +58,13 @@ public class PrintFormsTests extends TestBase {
     }
 
     @Features("Печатные формы")
-    @Stories("Отчет \"Печать акта осмотра\"")
+    @Stories("Печать акта осмотра")
     @Test
-    public void printViewActTests() throws InterruptedException {
+    public void printViewActTest() throws InterruptedException {
         JournalsPage journalsPage = new JournalsPage(driver);
         journalsPage.userGoToViewActsJournal();
         journalsPage.waitForPageViewActsJournalTitleLoaded();
+        journalsPage.userSetActCreationTypeViewAct();
         journalsPage.userFormedJournal();
         DocumentsPage documentsPage = new DocumentsPage(driver);
         documentsPage.waitForSearchIsFinal();
@@ -72,9 +74,25 @@ public class PrintFormsTests extends TestBase {
     }
 
     @Features("Печатные формы")
-    @Stories("Отчет \"Печать акта проверки\"")
+    @Stories("Печать акта мониторинга")
     @Test
-    public void printActTests() throws InterruptedException {
+    public void printMonitoringActTest() throws InterruptedException {
+        JournalsPage journalsPage = new JournalsPage(driver);
+        journalsPage.userGoToViewActsJournal();
+        journalsPage.waitForPageViewActsJournalTitleLoaded();
+        journalsPage.userSetActCreationTypeMonitoringAct();
+        journalsPage.userFormedJournal();
+        DocumentsPage documentsPage = new DocumentsPage(driver);
+        documentsPage.waitForSearchIsFinal();
+        documentsPage.userOpenMonitoringAct();
+        documentsPage.userPrintMonitoringAct();
+        assertTrue("Файл с печатной формой не сформировался за 1 минуту", documentsPage.isMonitoringActPrint());
+    }
+
+    @Features("Печатные формы")
+    @Stories("Печать акта проверки")
+    @Test
+    public void printActTest() throws InterruptedException {
         JournalsPage journalsPage = new JournalsPage(driver);
         journalsPage.userGoToActsJournal();
         journalsPage.waitForPageActsJournalLoaded();
@@ -87,9 +105,9 @@ public class PrintFormsTests extends TestBase {
     }
 
     @Features("Печатные формы")
-    @Stories("Отчет \"Печать приложения к акту проверки\"")
+    @Stories("Печать приложения к акту проверки")
     @Test
-    public void printAttachToActTests() throws InterruptedException {
+    public void printAttachToActTest() throws InterruptedException {
         JournalsPage journalsPage = new JournalsPage(driver);
         journalsPage.userGoToActsJournal();
         journalsPage.waitForPageActsJournalLoaded();
@@ -102,9 +120,9 @@ public class PrintFormsTests extends TestBase {
     }
 
     @Features("Печатные формы")
-    @Stories("Отчет \"Печать акта проверки исполнения предписания\"")
+    @Stories("Печать акта проверки исполнения предписания")
     @Test
-    public void printCheckActTests() throws InterruptedException {
+    public void printCheckActTest() throws InterruptedException {
         JournalsPage journalsPage = new JournalsPage(driver);
         journalsPage.userGoToActsJournal();
         journalsPage.waitForPageActsJournalLoaded();
@@ -117,9 +135,9 @@ public class PrintFormsTests extends TestBase {
     }
 
     @Features("Печатные формы")
-    @Stories("Отчет \"Печать приложениея к акту проверки исполнения предписания\"")
+    @Stories("Печать приложениея к акту проверки исполнения предписания")
     @Test
-    public void printAttachToCheckActTests() throws InterruptedException {
+    public void printAttachToCheckActTest() throws InterruptedException {
         JournalsPage journalsPage = new JournalsPage(driver);
         journalsPage.userGoToActsJournal();
         journalsPage.waitForPageActsJournalLoaded();
@@ -132,9 +150,9 @@ public class PrintFormsTests extends TestBase {
     }
 
     @Features("Печатные формы")
-    @Stories("Отчет \"Печать предписания\"")
+    @Stories("Печать предписания")
     @Test
-    public void printPrescriptionTests() throws InterruptedException {
+    public void printPrescriptionTest() throws InterruptedException {
         JournalsPage journalsPage = new JournalsPage(driver);
         journalsPage.userGoToPrescriptionsJournal();
         journalsPage.waitForPagePrescriptionsJournalLoaded();
@@ -147,9 +165,9 @@ public class PrintFormsTests extends TestBase {
     }
 
     @Features("Печатные формы")
-    @Stories("Отчет \"Печать определение об отказе в возбуждении дела\"")
+    @Stories("Печать определение об отказе в возбуждении дела")
     @Test
-    public void printDenyCriminalTests() throws InterruptedException {
+    public void printDenyCriminalTest() throws InterruptedException {
         JournalsPage journalsPage = new JournalsPage(driver);
         journalsPage.userGoToCriminalJournal();
         journalsPage.waitForPageCriminalJournalLoaded();
@@ -159,5 +177,20 @@ public class PrintFormsTests extends TestBase {
         documentsPage.userOpenDenyCriminal();
         documentsPage.userPrintDenyCriminal();
         assertTrue("Файл с печатной формой не сформировался за 1 минуту", documentsPage.isDenyCriminalPrint());
+    }
+
+    @Features("Печатные формы")
+    @Stories("Печать решение об отзыве предписания")
+    @Test
+    public void printRevokePrescriptionTest() throws InterruptedException {
+        DocsSearchPage docsSearchPage = new DocsSearchPage(driver);
+        docsSearchPage.userGoToDocsSearchPage();
+        docsSearchPage.waitForDocsSearchPageLoaded();
+        docsSearchPage.userFormedPageWithConditions();
+        DocumentsPage documentsPage = new DocumentsPage(driver);
+        documentsPage.waitForSearchIsFinal();
+        documentsPage.userOpenRevokePrescription();
+        documentsPage.userPrintRevokePrescription();
+        assertTrue("Файл с печатной формой не сформировался за 1 минуту", documentsPage.isRevokePrescription());
     }
 }
