@@ -49,7 +49,7 @@ public class PrintFormsTests extends TestBase {
         JournalsPage journalsPage = new JournalsPage(driver);
         journalsPage.userGoToInstructionsJournal();
         journalsPage.waitForPageInstructionsJournalLoaded();
-        journalsPage.userFormedJournal();
+        journalsPage.userFormedPrescriptionJournal(dateFormat.format(startDate));
         DocumentsPage documentsPage = new DocumentsPage(driver);
         documentsPage.waitForSearchIsFinal();
         documentsPage.userOpenOrder();
@@ -73,6 +73,23 @@ public class PrintFormsTests extends TestBase {
         assertTrue("Файл с печатной формой не сформировался за 1 минуту", documentsPage.isViewActPrint());
     }
 
+    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu не требуется подтверждение
+    @Features("Печатные формы")
+    @Stories("Печать акта осмотра")
+    @Test
+    public void printViewActWithoutConfirmTest() throws InterruptedException {
+        JournalsPage journalsPage = new JournalsPage(driver);
+        journalsPage.userGoToViewActsJournal();
+        journalsPage.waitForPageViewActsJournalTitleLoaded();
+        journalsPage.userSetActCreationTypeViewAct();
+        journalsPage.userFormedJournal();
+        DocumentsPage documentsPage = new DocumentsPage(driver);
+        documentsPage.waitForSearchIsFinal();
+        documentsPage.userOpenViewAct();
+        documentsPage.userPrintViewActWithoutConfirm();
+        assertTrue("Файл с печатной формой не сформировался за 1 минуту", documentsPage.isViewActPrint());
+    }
+
     @Features("Печатные формы")
     @Stories("Печать акта мониторинга")
     @Test
@@ -86,6 +103,23 @@ public class PrintFormsTests extends TestBase {
         documentsPage.waitForSearchIsFinal();
         documentsPage.userOpenMonitoringAct();
         documentsPage.userPrintMonitoringAct();
+        assertTrue("Файл с печатной формой не сформировался за 1 минуту", documentsPage.isMonitoringActPrint());
+    }
+
+    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu не требуется подтверждение
+    @Features("Печатные формы")
+    @Stories("Печать акта мониторинга")
+    @Test
+    public void printMonitoringActWithoutConfirmTest() throws InterruptedException {
+        JournalsPage journalsPage = new JournalsPage(driver);
+        journalsPage.userGoToViewActsJournal();
+        journalsPage.waitForPageViewActsJournalTitleLoaded();
+        journalsPage.userSetActCreationTypeMonitoringAct();
+        journalsPage.userFormedJournal();
+        DocumentsPage documentsPage = new DocumentsPage(driver);
+        documentsPage.waitForSearchIsFinal();
+        documentsPage.userOpenMonitoringAct();
+        documentsPage.userPrintMonitoringActWithoutConfirm();
         assertTrue("Файл с печатной формой не сформировался за 1 минуту", documentsPage.isMonitoringActPrint());
     }
 
@@ -119,6 +153,22 @@ public class PrintFormsTests extends TestBase {
         assertTrue("Файл с печатной формой не сформировался за 1 минуту", documentsPage.isAttachToActPrint());
     }
 
+    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu не требуется подтверждение
+    @Features("Печатные формы")
+    @Stories("Печать приложения к акту проверки")
+    @Test
+    public void printAttachToActWithoutConfirmTest() throws InterruptedException {
+        JournalsPage journalsPage = new JournalsPage(driver);
+        journalsPage.userGoToActsJournal();
+        journalsPage.waitForPageActsJournalLoaded();
+        journalsPage.userFormedJournal();
+        DocumentsPage documentsPage = new DocumentsPage(driver);
+        documentsPage.waitForSearchIsFinal();
+        documentsPage.userOpenAttachToAct();
+        documentsPage.userPrintAttachToActWithoutConfirm();
+        assertTrue("Файл с печатной формой не сформировался за 1 минуту", documentsPage.isAttachToActPrint());
+    }
+
     @Features("Печатные формы")
     @Stories("Печать акта проверки исполнения предписания")
     @Test
@@ -131,6 +181,21 @@ public class PrintFormsTests extends TestBase {
         documentsPage.waitForSearchIsFinal();
         documentsPage.userOpenCheckAct();
         documentsPage.userPrintCheckAct();
+        assertTrue("Файл с печатной формой не сформировался за 1 минуту", documentsPage.isCheckActPrint());
+    }
+    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu не требуется подтверждение
+    @Features("Печатные формы")
+    @Stories("Печать акта проверки исполнения предписания")
+    @Test
+    public void printCheckActWithoutConfirmTest() throws InterruptedException {
+        JournalsPage journalsPage = new JournalsPage(driver);
+        journalsPage.userGoToActsJournal();
+        journalsPage.waitForPageActsJournalLoaded();
+        journalsPage.userFormedJournal();
+        DocumentsPage documentsPage = new DocumentsPage(driver);
+        documentsPage.waitForSearchIsFinal();
+        documentsPage.userOpenCheckAct();
+        documentsPage.userPrintCheckActWithoutConfirm();
         assertTrue("Файл с печатной формой не сформировался за 1 минуту", documentsPage.isCheckActPrint());
     }
 
@@ -176,6 +241,22 @@ public class PrintFormsTests extends TestBase {
         documentsPage.waitForSearchIsFinal();
         documentsPage.userOpenDenyCriminal();
         documentsPage.userPrintDenyCriminal();
+        assertTrue("Файл с печатной формой не сформировался за 1 минуту", documentsPage.isDenyCriminalPrint());
+    }
+
+    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu не требуется подтверждение
+    @Features("Печатные формы")
+    @Stories("Печать определение об отказе в возбуждении дела")
+    @Test
+    public void printDenyCriminalWithoutConfirmTest() throws InterruptedException {
+        JournalsPage journalsPage = new JournalsPage(driver);
+        journalsPage.userGoToCriminalJournal();
+        journalsPage.waitForPageCriminalJournalLoaded();
+        journalsPage.userFormedJournal();
+        DocumentsPage documentsPage = new DocumentsPage(driver);
+        documentsPage.waitForSearchIsFinal();
+        documentsPage.userOpenDenyCriminal();
+        documentsPage.userPrintDenyCriminalWithoutConfirm();
         assertTrue("Файл с печатной формой не сформировался за 1 минуту", documentsPage.isDenyCriminalPrint());
     }
 

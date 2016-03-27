@@ -42,6 +42,8 @@ public class DocumentsPage extends Page {
     By printRevokePrescriptionButton = By.linkText("Решение об отзыве предписания");
 
     By resultSearchField = By.xpath("//div[@class='table-wrap']//tbody/tr[1]/td[2]");
+    By secondPage = By.linkText("2");
+    By navigatorLabel = By.className("navigatorLabel");
 
     public void ensureOrderPageOpen(){
         wait.until(ExpectedConditions.presenceOfElementLocated(orderPageTitle));
@@ -123,6 +125,11 @@ public class DocumentsPage extends Page {
         userPrintDocument(printViewActButton);
         userConfirmPrint();
     }
+    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu подтверждение не требуется
+    @Step("Пользователь печатает акт осмотра")
+    public void userPrintViewActWithoutConfirm() {
+        userPrintDocument(printViewActButton);
+    }
 
     @Step("Проверяем наличие печатной формы")
     public boolean isViewActPrint()throws InterruptedException {
@@ -131,6 +138,7 @@ public class DocumentsPage extends Page {
 
     @Step("Пользователь открывает акт проверки")
     public void userOpenAct(){
+        findAndOpenAct("акт проверки");
         userOpenDocument(resultSearchField, actPageTitle);
     }
 
@@ -145,15 +153,33 @@ public class DocumentsPage extends Page {
         return isDocumentPrint("Акт+проверки");
     }
 
-    public void findAndOpenAct(String name){
+    public void findAndOpenAct(String name) {
         int i;
-        for (i=1; i<=10; i++){
-            WebElement element = driver.findElement(By.xpath("//div[@class='table-wrap']//tbody/tr["+i+"]/td[11]"));
+        boolean isActFind = false;
+        for (i = 1; i <= 10; i++) {
+            WebElement element = driver.findElement(By.xpath("//div[@class='table-wrap']//tbody/tr[" + i + "]/td[11]"));
             String text = element.getText();
             System.out.println(text);
-            if (text.equals(name)){
+            if (text.equals(name)) {
                 mouseDoubleClick(element);
+                isActFind = true;
                 break;
+            }
+        }
+        if (isActFind == false) {
+            click(secondPage);
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(secondPage));
+            String label = getElementText(navigatorLabel).substring(17, 19);
+            int count = Integer.parseInt(label);
+            for (int c = 1; c <= count - 10; c++) {
+                WebElement element = driver.findElement(By.xpath("//div[@class='table-wrap']//tbody/tr[" + c + "]/td[11]"));
+                String text = element.getText();
+                System.out.println(text);
+                if (text.equals(name)) {
+                    mouseDoubleClick(element);
+                    //isActFind = true;
+                    break;
+                }
             }
         }
     }
@@ -168,6 +194,11 @@ public class DocumentsPage extends Page {
     public void userPrintAttachToAct() {
         userPrintDocument(printAttachToActButton);
         userConfirmPrint();
+    }
+    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu подтверждение не требуется
+    @Step("Пользователь печатает приложение к акту проверки")
+    public void userPrintAttachToActWithoutConfirm() {
+        userPrintDocument(printAttachToActButton);
     }
 
     @Step("Проверяем наличие печатной формы")
@@ -185,6 +216,11 @@ public class DocumentsPage extends Page {
     public void userPrintCheckAct() {
         userPrintDocument(printCheckActButton);
         userConfirmPrint();
+    }
+    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu подтверждение не требуется
+    @Step("Пользователь печатает акт проверки исполнения предписания")
+    public void userPrintCheckActWithoutConfirm() {
+        userPrintDocument(printCheckActButton);
     }
 
     @Step("Проверяем наличие печатной формы")
@@ -235,6 +271,11 @@ public class DocumentsPage extends Page {
         userPrintDocument(printDenyCriminalButton);
         userConfirmPrint();
     }
+    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu подтверждение не требуется
+    @Step("Пользователь печатает определение об отказе в возбуждении дела")
+    public void userPrintDenyCriminalWithoutConfirm() {
+        userPrintDocument(printDenyCriminalButton);
+    }
 
     @Step("Проверяем наличие печатной формы")
     public boolean isDenyCriminalPrint()throws InterruptedException {
@@ -265,6 +306,11 @@ public class DocumentsPage extends Page {
     public void userPrintMonitoringAct() {
         userPrintDocument(printMonitoringActButton);
         userConfirmPrint();
+    }
+    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu подтверждение не требуется
+    @Step("Пользователь печатает акт мониторинга")
+    public void userPrintMonitoringActWithoutConfirm() {
+        userPrintDocument(printMonitoringActButton);
     }
 
     @Step("Проверяем наличие печатной формы")

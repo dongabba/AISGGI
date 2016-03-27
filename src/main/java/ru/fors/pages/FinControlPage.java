@@ -17,7 +17,7 @@ public class FinControlPage extends MainMenu{
     By paymentsTitle = By.xpath("//h3[text()='Платежи']");
     By applicationsForRefundTitle = By.xpath("//h3[text()='Заявки на возврат']");
     By profitAndPaymentsTitle = By.xpath("//h3[text()='Связывание начислений и платежей']");
-    By financeTitle = By.xpath("//h3[text()='Финансовые показатели по подразделениям ГЖИ МО (руб)']");
+    By financeTitle = By.xpath("//h3[text()='Финансовые показатели по подразделениям ГЖИ (руб)']");
     By findButton = By.xpath("//button[text()='Искать']");
     By resultTable = By.xpath("//*[@class='table-wrap']//tbody/tr[1]");
     By financePageResult = By.xpath("//td[text()='Госжилинспекция Московской области']");

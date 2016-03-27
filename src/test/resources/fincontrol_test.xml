@@ -24,6 +24,16 @@
 	<test name = "PrintForms_FCRole">
 		<classes>
 			<class name="ru.fors.tests.PrintFormsTests"/>
+			<methods>
+				<exclude name="printViewActTest"/>
+				<exclude name="printViewActWithoutConfirmTest"/>
+				<exclude name="printMonitoringActTest"/>
+				<exclude name="printMonitoringActWithoutConfirmTest"/>
+				<exclude name="printAttachToActTest"/>
+				<exclude name="printCheckActTest"/>
+				<exclude name="printDenyCriminalTest"/>
+				<exclude name="printDenyCriminalWithoutConfirmTest"/>
+			</methods>
 		</classes>
 	</test>
 	<test name = "FinControlTests_FCRole">

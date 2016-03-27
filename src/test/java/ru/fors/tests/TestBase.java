@@ -22,7 +22,7 @@ public class TestBase {
 	public String dir;
 
 	DateFormat dateFormat = new SimpleDateFormat("dd.MM.YYYY");
-	Date startDate = new Date(System.currentTimeMillis()-604800000);
+	Date startDate = new Date(System.currentTimeMillis()-604800000); //-7 дней от текущей
 	Date finishDate = new Date(System.currentTimeMillis()-432000000);
 	Date docDate = new Date(System.currentTimeMillis()-345600000);
 	Date prescripDate = new Date(System.currentTimeMillis()-259200000);

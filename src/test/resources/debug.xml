@@ -8,6 +8,13 @@
 	<test name = "JournalsTests_InspectorRole">
 			<classes>
 				<class name="ru.fors.tests.PrintFormsTests"/>
+				<methods>
+					<exclude name="printViewActWithoutConfirmTest"/>
+					<exclude name="printMonitoringActWithoutConfirmTest"/>
+					<exclude name="printAttachToActWithoutConfirmTest"/>
+					<exclude name="printCheckActWithoutConfirmTest"/>
+					<exclude name="printDenyCriminalWithoutConfirmTest"/>
+				</methods>
 			</classes>
 		</test>
 	<!--
