@@ -22,6 +22,8 @@
 				<exclude name="printAttachToActTest"/>
 				<exclude name="printCheckActTest"/>
 				<exclude name="printDenyCriminalTest"/>
+				<exclude name="printActTest"/>
+				<exclude name="printPrescriptionTest"/>
 			</methods>
 		</classes>
 	</test>

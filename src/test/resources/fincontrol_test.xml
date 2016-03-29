@@ -33,6 +33,9 @@
 				<exclude name="printCheckActTest"/>
 				<exclude name="printDenyCriminalTest"/>
 				<exclude name="printDenyCriminalWithoutConfirmTest"/>
+				<exclude name="printActTest"/>
+				<exclude name="printPrescriptionTest"/>
+				<exclude name="printPrescriptionWithoutConfirmTest"/>
 			</methods>
 		</classes>
 	</test>

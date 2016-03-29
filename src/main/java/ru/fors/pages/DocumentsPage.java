@@ -147,6 +147,11 @@ public class DocumentsPage extends Page {
         userPrintDocument(printActButton);
         userConfirmPrint();
     }
+    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu подтверждение не требуется
+    @Step("Пользователь печатает акт проверки")
+    public void userPrintActWithoutConfirm() {
+        userPrintDocument(printActButton);
+    }
 
     @Step("Проверяем наличие печатной формы")
     public boolean isActPrint()throws InterruptedException {
@@ -254,6 +259,11 @@ public class DocumentsPage extends Page {
     public void userPrintPrescription() {
         userPrintDocument(printPrescriptionButton);
         userConfirmPrint();
+    }
+    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu подтверждение не требуется
+    @Step("Пользователь печатает предписание")
+    public void userPrintPrescriptionWithoutConfirm() {
+        userPrintDocument(printPrescriptionButton);
     }
 
     @Step("Проверяем наличие печатной формы")

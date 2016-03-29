@@ -13,6 +13,7 @@
         <aspectj.version>1.8.5</aspectj.version>
 		<selenium.version>2.50.0</selenium.version>
 	  	<url>http://aisggi.fors.ru:8080/ggi-inspection/login?1</url>
+		<dev.url>http://aisggi.fors.ru:8081/ggi-inspection</dev.url>
 	  	<wait.seconds>60</wait.seconds>
 	  	<windowsDir>C:\\reports</windowsDir>
 	  	<linuxDir>~/Documents/ggi_reports</linuxDir>
@@ -134,6 +135,16 @@
 		<id>test_chrome</id>
 		<properties>
 			<site.url>${url}</site.url>
+			<imp.wait>${wait.seconds}</imp.wait>
+			<browser.name>chrome</browser.name>
+			<downloadDir>${windowsDir}</downloadDir>
+			<suites>test_env</suites>
+		</properties>
+		</profile>
+		<profile>
+		<id>dev_chrome</id>
+		<properties>
+			<site.url>${dev.url}</site.url>
 			<imp.wait>${wait.seconds}</imp.wait>
 			<browser.name>chrome</browser.name>
 			<downloadDir>${windowsDir}</downloadDir>

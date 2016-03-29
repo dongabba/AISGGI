@@ -49,7 +49,8 @@ public class PrintFormsTests extends TestBase {
         JournalsPage journalsPage = new JournalsPage(driver);
         journalsPage.userGoToInstructionsJournal();
         journalsPage.waitForPageInstructionsJournalLoaded();
-        journalsPage.userFormedPrescriptionJournal(dateFormat.format(startDate));
+        journalsPage.userFormedJournal();
+        //journalsPage.userFormedPrescriptionJournal(dateFormat.format(startDate));
         DocumentsPage documentsPage = new DocumentsPage(driver);
         documentsPage.waitForSearchIsFinal();
         documentsPage.userOpenOrder();
@@ -135,6 +136,21 @@ public class PrintFormsTests extends TestBase {
         documentsPage.waitForSearchIsFinal();
         documentsPage.userOpenAct();
         documentsPage.userPrintAct();
+        assertTrue("Файл с печатной формой не сформировался за 1 минуту", documentsPage.isActPrint());
+    }
+    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu не требуется подтверждение
+    @Features("Печатные формы")
+    @Stories("Печать акта проверки")
+    @Test
+    public void printActWithoutConfirmTest() throws InterruptedException {
+        JournalsPage journalsPage = new JournalsPage(driver);
+        journalsPage.userGoToActsJournal();
+        journalsPage.waitForPageActsJournalLoaded();
+        journalsPage.userFormedJournal();
+        DocumentsPage documentsPage = new DocumentsPage(driver);
+        documentsPage.waitForSearchIsFinal();
+        documentsPage.userOpenAct();
+        documentsPage.userPrintActWithoutConfirm();
         assertTrue("Файл с печатной формой не сформировался за 1 минуту", documentsPage.isActPrint());
     }
 
@@ -226,6 +242,21 @@ public class PrintFormsTests extends TestBase {
         documentsPage.waitForSearchIsFinal();
         documentsPage.userOpenPrescription();
         documentsPage.userPrintPrescription();
+        assertTrue("Файл с печатной формой не сформировался за 1 минуту", documentsPage.isPrescriptionPrint());
+    }
+    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu не требуется подтверждение
+    @Features("Печатные формы")
+    @Stories("Печать предписания")
+    @Test
+    public void printPrescriptionWithoutConfirmTest() throws InterruptedException {
+        JournalsPage journalsPage = new JournalsPage(driver);
+        journalsPage.userGoToPrescriptionsJournal();
+        journalsPage.waitForPagePrescriptionsJournalLoaded();
+        journalsPage.userFormedJournal();
+        DocumentsPage documentsPage = new DocumentsPage(driver);
+        documentsPage.waitForSearchIsFinal();
+        documentsPage.userOpenPrescription();
+        documentsPage.userPrintPrescriptionWithoutConfirm();
         assertTrue("Файл с печатной формой не сформировался за 1 минуту", documentsPage.isPrescriptionPrint());
     }
 
