@@ -9,9 +9,9 @@
   <properties>
 	  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	  	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-	  	<allure.version>1.4.16</allure.version>
+	  	<allure.version>1.4.23</allure.version>
         <aspectj.version>1.8.5</aspectj.version>
-		<selenium.version>2.50.0</selenium.version>
+		<selenium.version>2.53.0</selenium.version>
 	  	<url>http://aisggi.fors.ru:8080/ggi-inspection/login?1</url>
 		<dev.url>http://aisggi.fors.ru:8081/ggi-inspection</dev.url>
 	  	<wait.seconds>60</wait.seconds>
@@ -113,7 +113,10 @@
             <plugin>
                 <groupId>ru.yandex.qatools.allure</groupId>
                 <artifactId>allure-maven-plugin</artifactId>
-                <version>2.2</version>
+                <version>2.5</version>
+				<configuration>
+					<allureResultsDirectory>${project.build.directory}/allure-results</allureResultsDirectory>
+				</configuration>
             </plugin>
         </plugins>
     </reporting>
@@ -127,9 +130,6 @@
 				<browser.name>firefox</browser.name>
 				<suites>test_env</suites>
 			</properties>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 		</profile>
 		<profile>
 		<id>test_chrome</id>
@@ -140,6 +140,9 @@
 			<downloadDir>${windowsDir}</downloadDir>
 			<suites>test_env</suites>
 		</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 		</profile>
 		<profile>
 		<id>dev_chrome</id>

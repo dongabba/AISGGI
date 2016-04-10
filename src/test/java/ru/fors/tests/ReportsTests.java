@@ -20,8 +20,12 @@ public class ReportsTests extends TestBase {
     @BeforeClass
     public void cleanWorkingDirectory() {
         File file = new File(dir);
-        //System.out.println("Is directory exists "+ file.exists());
-        //System.out.println("Total files in directory: " +dir+" "+ file.listFiles().length);
+        if (file.isDirectory()){
+            System.out.println("Directory exist");
+        }else{
+            file.mkdirs();
+            System.out.println("Directory created");
+        }
         File[] files = file.listFiles();
         for (int i = 0; i < files.length; i++) {
             File f1 = files[i];

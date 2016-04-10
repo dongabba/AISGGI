@@ -21,8 +21,12 @@ public class PrintFormsTests extends TestBase {
     @BeforeClass
     public void cleanWorkingDirectory() {
         File file = new File(dir);
-        //System.out.println("Is directory exists "+ file.exists());
-        //System.out.println("Total files in directory: " +dir+" "+ file.listFiles().length);
+        if (file.isDirectory()){
+            System.out.println("Directory exist");
+        }else{
+            file.mkdirs();
+            System.out.println("Directory created");
+        }
         File[] files = file.listFiles();
         for (int i = 0; i < files.length; i++) {
             File f1 = files[i];
@@ -222,11 +226,26 @@ public class PrintFormsTests extends TestBase {
         JournalsPage journalsPage = new JournalsPage(driver);
         journalsPage.userGoToActsJournal();
         journalsPage.waitForPageActsJournalLoaded();
-        journalsPage.userFormedJournal();
+        journalsPage.userFormedActJournal();
         DocumentsPage documentsPage = new DocumentsPage(driver);
         documentsPage.waitForSearchIsFinal();
         documentsPage.userOpenAttachToCheckAct();
         documentsPage.userPrintAttachToCheckAct();
+        assertTrue("Файл с печатной формой не сформировался за 1 минуту", documentsPage.isAttachToCheckActPrint());
+    }
+    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu не требуется подтверждение
+    @Features("Печатные формы")
+    @Stories("Печать приложениея к акту проверки исполнения предписания")
+    @Test
+    public void printAttachToCheckActWithoutConfirmTest() throws InterruptedException {
+        JournalsPage journalsPage = new JournalsPage(driver);
+        journalsPage.userGoToActsJournal();
+        journalsPage.waitForPageActsJournalLoaded();
+        journalsPage.userFormedActJournal();
+        DocumentsPage documentsPage = new DocumentsPage(driver);
+        documentsPage.waitForSearchIsFinal();
+        documentsPage.userOpenAttachToCheckAct();
+        documentsPage.userPrintAttachToCheckActWithoutConfirm();
         assertTrue("Файл с печатной формой не сформировался за 1 минуту", documentsPage.isAttachToCheckActPrint());
     }
 

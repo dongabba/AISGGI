@@ -172,18 +172,34 @@ public class DocumentsPage extends Page {
             }
         }
         if (isActFind == false) {
-            click(secondPage);
-            wait.until(ExpectedConditions.invisibilityOfElementLocated(secondPage));
-            String label = getElementText(navigatorLabel).substring(17, 19);
-            int count = Integer.parseInt(label);
-            for (int c = 1; c <= count - 10; c++) {
-                WebElement element = driver.findElement(By.xpath("//div[@class='table-wrap']//tbody/tr[" + c + "]/td[11]"));
-                String text = element.getText();
-                System.out.println(text);
-                if (text.equals(name)) {
-                    mouseDoubleClick(element);
-                    //isActFind = true;
-                    break;
+            int page = 2;
+            int p = 10;
+            boolean nextPage = true;
+            while(isActFind == false){
+                By element1 = By.linkText(""+page+"");
+                click(element1);
+                wait.until(ExpectedConditions.invisibilityOfElementLocated(element1));
+                String label = getElementText(navigatorLabel).substring(17, 19);
+                int count = Integer.parseInt(label);
+                for (int c = 1; c <= count - p; c++) {
+                    WebElement element = driver.findElement(By.xpath("//div[@class='table-wrap']//tbody/tr[" + c + "]/td[11]"));
+                    String text = element.getText();
+                    System.out.println(text);
+                    if (text.equals(name)) {
+                        mouseDoubleClick(element);
+                        isActFind = true;
+                        nextPage = false;
+                        break;
+                    }
+                }
+                if (nextPage==true) {
+                    page = page + 1;
+                    p = p + 10;
+                    try {
+                        wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("" + page + "")));
+                    } catch (Exception e) {
+                        break;
+                    }
                 }
             }
         }
@@ -222,6 +238,7 @@ public class DocumentsPage extends Page {
         userPrintDocument(printCheckActButton);
         userConfirmPrint();
     }
+
     //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu подтверждение не требуется
     @Step("Пользователь печатает акт проверки исполнения предписания")
     public void userPrintCheckActWithoutConfirm() {
@@ -243,6 +260,11 @@ public class DocumentsPage extends Page {
     public void userPrintAttachToCheckAct() {
         userPrintDocument(printAttachToCheckActButton);
         userConfirmPrint();
+    }
+    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu подтверждение не требуется
+    @Step("Пользователь печатает приложение к акту проверки исполнения предписания")
+    public void userPrintAttachToCheckActWithoutConfirm() {
+        userPrintDocument(printAttachToCheckActButton);
     }
 
     @Step("Проверяем наличие печатной формы")

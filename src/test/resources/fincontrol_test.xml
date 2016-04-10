@@ -36,6 +36,7 @@
 				<exclude name="printActTest"/>
 				<exclude name="printPrescriptionTest"/>
 				<exclude name="printPrescriptionWithoutConfirmTest"/>
+				<exclude name="printAttachToCheckActTest"/>
 			</methods>
 		</classes>
 	</test>

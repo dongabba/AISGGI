@@ -41,7 +41,7 @@ public class JournalsPage extends MainMenu{
     By referencesJournalTitle = By.xpath("//h3[text()='Обращения']");
 
     By findButton = By.xpath("//button[text()='Искать']");
-    By prescriptionDateFrom = By.cssSelector("input[name=\"prescriptionDate:from:date\"]");
+    By actDateFrom = By.cssSelector("input[name=\"startDate:from:date\"]");
     By orderNumberInTable = By.xpath("//div[@class='table-wrap']//tbody//td[2]");
     By orderStatusInTable = By.xpath("//div[@class='table-wrap']//tbody//td[8]");
     By tableWithResults = By.xpath("//*[@class='act-panel']/div[2]//table/tbody/tr[1]");
@@ -260,13 +260,13 @@ public class JournalsPage extends MainMenu{
         return new OrderPage(driver);
     }
 
-    public void userSetPrescriptionDate(String date){
-        type(prescriptionDateFrom, date);
+    public void userSetActDate(String date){
+        type(actDateFrom, date);
     }
 
-    //для печатных форм нужны свежие документы, поэтому ищем -7 дней от текущей даты
-    public void userFormedPrescriptionJournal(String date){
-        userSetPrescriptionDate(date);
+    //ищем приложение к акту проверки предписания с 01 февраля 2016
+    public void userFormedActJournal(){
+        userSetActDate("01.02.2016");
         click(findButton);
     }
 
