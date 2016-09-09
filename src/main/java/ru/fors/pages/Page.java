@@ -1,13 +1,12 @@
 package ru.fors.pages;
 
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import ru.fors.utils.PropertyLoader;
 
 public class Page {
@@ -24,7 +23,7 @@ public class Page {
 
 	public void checkElementBeforeAction(By element) {
 		int count = 0;
-		while (count < 5) {
+		while (count < 10) {
 			try {
 				wait1.until(ExpectedConditions.elementToBeClickable(element));
 				count = count + 5;
@@ -37,7 +36,7 @@ public class Page {
 	public void type(By element, String string) {
 		checkElementBeforeAction(element);
 		int i=0;
-        while (i<5){
+        while (i<10){
             try{
                 click(element);
                 driver.findElement(element).clear();
@@ -53,7 +52,7 @@ public class Page {
 	public void click(By element) {
 		checkElementBeforeAction(element);
         int i=0;
-        while (i<5){
+        while (i<10){
             try {
                 driver.findElement(element).click();
                 break;
@@ -77,7 +76,7 @@ public class Page {
 
 	public void clickOn3Link(By element, By element1, By element2) {
 		int count = 0;
-		while (count < 5) {
+		while (count < 10) {
 			try {
 				click(element);
 				wait1.until(ExpectedConditions.elementToBeClickable(element1));
@@ -94,7 +93,7 @@ public class Page {
 
 	public void clickOn2Link(By element, By element1) {
 		int count = 0;
-		while (count < 5) {
+		while (count < 10) {
 			try {
 				click(element);
 				wait1.until(ExpectedConditions.elementToBeClickable(element1));

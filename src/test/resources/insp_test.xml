@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="roleInspTests">
 	<parameter name="username" value="ggi_insp" />
-	<parameter name="password" value="ggi_insp" />
+	<parameter name="password" value="ggi_insp_fors" />
 	<parameter name="role" value="АИС «Инспектор»" />
 	<test name = "JournalsTests_InspectorRole">
 		<classes>
@@ -16,16 +16,6 @@
 	<test name = "PrintForms_InspRole">
 		<classes>
 			<class name="ru.fors.tests.PrintFormsTests"/>
-			<methods>
-				<exclude name="printViewActWithoutConfirmTest"/>
-				<exclude name="printMonitoringActWithoutConfirmTest"/>
-				<exclude name="printAttachToActWithoutConfirmTest"/>
-				<exclude name="printCheckActWithoutConfirmTest"/>
-				<exclude name="printDenyCriminalWithoutConfirmTest"/>
-				<exclude name="printPrescriptionWithoutConfirmTest"/>
-				<exclude name="printActWithoutConfirmTest"/>
-				<exclude name="printAttachToCheckActWithoutConfirmTest"/>
-			</methods>
 		</classes>
 	</test>
 	<test name = "FinControlTests_InspectorRole">
@@ -48,6 +38,7 @@
 			<class name="ru.fors.tests.ReportsTests"/>
 			<methods>
 				<exclude name="dataOfDocEnteredReport2Test"/>
+				<exclude name="jurManagementRegistryOfPrescriptionsReportTest"/>
 			</methods>
 		</classes>
 	</test>

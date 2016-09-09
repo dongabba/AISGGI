@@ -89,10 +89,12 @@ public class DocumentsPage extends Page {
         return isDocumentPrint("Распоряжение");
     }
 
-    public void userOpenDocument(By element1, By element2) {
+    public String userOpenDocument(By element1, By element2) {
         int i=0;
+        String docNumb = "";
         while (i<5) {
             try {
+                docNumb = getElementText(element1);
                 mouseDoubleClick(driver.findElement(element1));
                 wait1.until(ExpectedConditions.presenceOfElementLocated(element2));
                 break;
@@ -100,35 +102,32 @@ public class DocumentsPage extends Page {
                 i=i+1;
             }
         }
+        return docNumb;
     }
 
     public void userConfirmPrint(){
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h3[text()='Подтверждение']")));
-        click(By.cssSelector("button[name='ok']"));
+        if (isConfirmAlertExist()==true){
+            click(By.cssSelector("button[name='ok']"));
+        }
     }
 
     public void waitForSearchIsFinal(){
         wait.until(ExpectedConditions.presenceOfElementLocated(resultSearchField));
     }
     @Step("Пользователь открывает ордер")
-    public void userOpenOrder(){
-        userOpenDocument(resultSearchField, orderPageTitle);
+    public String userOpenOrder(){
+        return userOpenDocument(resultSearchField, orderPageTitle);
     }
 
     @Step("Пользователь открывает акт осмотра")
-    public void userOpenViewAct(){
-        userOpenDocument(resultSearchField, viewActsPageTitle);
+    public String userOpenViewAct(){
+        return userOpenDocument(resultSearchField, viewActsPageTitle);
     }
 
     @Step("Пользователь печатает акт осмотра")
     public void userPrintViewAct() {
         userPrintDocument(printViewActButton);
         userConfirmPrint();
-    }
-    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu подтверждение не требуется
-    @Step("Пользователь печатает акт осмотра")
-    public void userPrintViewActWithoutConfirm() {
-        userPrintDocument(printViewActButton);
     }
 
     @Step("Проверяем наличие печатной формы")
@@ -137,9 +136,10 @@ public class DocumentsPage extends Page {
     }
 
     @Step("Пользователь открывает акт проверки")
-    public void userOpenAct(){
-        findAndOpenAct("акт проверки");
-        userOpenDocument(resultSearchField, actPageTitle);
+    public String userOpenAct(){
+        String docNumb = findAndOpenAct("акт проверки");
+        //userOpenDocument(resultSearchField, actPageTitle);
+        return docNumb;
     }
 
     @Step("Пользователь печатает акт проверки")
@@ -147,18 +147,14 @@ public class DocumentsPage extends Page {
         userPrintDocument(printActButton);
         userConfirmPrint();
     }
-    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu подтверждение не требуется
-    @Step("Пользователь печатает акт проверки")
-    public void userPrintActWithoutConfirm() {
-        userPrintDocument(printActButton);
-    }
 
     @Step("Проверяем наличие печатной формы")
     public boolean isActPrint()throws InterruptedException {
         return isDocumentPrint("Акт+проверки");
     }
 
-    public void findAndOpenAct(String name) {
+    public String findAndOpenAct(String name) {
+        String docNumb = "";
         int i;
         boolean isActFind = false;
         for (i = 1; i <= 10; i++) {
@@ -166,6 +162,7 @@ public class DocumentsPage extends Page {
             String text = element.getText();
             System.out.println(text);
             if (text.equals(name)) {
+                docNumb = getElementText(By.xpath("//div[@class='table-wrap']//tbody/tr[" + i + "]/td[2]"));
                 mouseDoubleClick(element);
                 isActFind = true;
                 break;
@@ -186,6 +183,7 @@ public class DocumentsPage extends Page {
                     String text = element.getText();
                     System.out.println(text);
                     if (text.equals(name)) {
+                        docNumb = getElementText(By.xpath("//div[@class='table-wrap']//tbody/tr[" + c + "]/td[2]"));
                         mouseDoubleClick(element);
                         isActFind = true;
                         nextPage = false;
@@ -203,12 +201,14 @@ public class DocumentsPage extends Page {
                 }
             }
         }
+        return docNumb;
     }
 
     @Step("Пользователь открывает приложение к акту проверки")
-    public void userOpenAttachToAct(){
-        findAndOpenAct("приложение к акту проверки");
+    public String userOpenAttachToAct(){
+        String docNumb = findAndOpenAct("приложение к акту проверки");
         wait.until(ExpectedConditions.presenceOfElementLocated(attachToActPageTitle));
+        return docNumb;
     }
 
     @Step("Пользователь печатает приложение к акту проверки")
@@ -216,10 +216,14 @@ public class DocumentsPage extends Page {
         userPrintDocument(printAttachToActButton);
         userConfirmPrint();
     }
-    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu подтверждение не требуется
-    @Step("Пользователь печатает приложение к акту проверки")
-    public void userPrintAttachToActWithoutConfirm() {
-        userPrintDocument(printAttachToActButton);
+
+    public boolean isConfirmAlertExist(){
+        try {
+            wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h3[text()='Подтверждение']")));
+            return true;
+        } catch (Exception e){
+            return false;
+        }
     }
 
     @Step("Проверяем наличие печатной формы")
@@ -228,9 +232,10 @@ public class DocumentsPage extends Page {
     }
 
     @Step("Пользователь открывает акт проверки исполнения предписания")
-    public void userOpenCheckAct(){
-        findAndOpenAct("акт проверки исполнения предписания");
+    public String userOpenCheckAct(){
+        String docNumb = findAndOpenAct("акт проверки исполнения предписания");
         wait.until(ExpectedConditions.presenceOfElementLocated(checkActPageTitle));
+        return docNumb;
     }
 
     @Step("Пользователь печатает акт проверки исполнения предписания")
@@ -239,32 +244,22 @@ public class DocumentsPage extends Page {
         userConfirmPrint();
     }
 
-    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu подтверждение не требуется
-    @Step("Пользователь печатает акт проверки исполнения предписания")
-    public void userPrintCheckActWithoutConfirm() {
-        userPrintDocument(printCheckActButton);
-    }
-
     @Step("Проверяем наличие печатной формы")
     public boolean isCheckActPrint()throws InterruptedException {
         return isDocumentPrint("Акт+проверки+исполнения+предписания");
     }
 
     @Step("Пользователь открывает приложение к акту проверки исполнения предписания")
-    public void userOpenAttachToCheckAct(){
-        findAndOpenAct("приложение к акту проверки исполнения предписания");
+    public String userOpenAttachToCheckAct(){
+        String docNumb = findAndOpenAct("приложение к акту проверки исполнения предписания");
         wait.until(ExpectedConditions.presenceOfElementLocated(attachToCheckActPageTitle));
+        return docNumb;
     }
 
     @Step("Пользователь печатает приложение к акту проверки исполнения предписания")
     public void userPrintAttachToCheckAct() {
         userPrintDocument(printAttachToCheckActButton);
         userConfirmPrint();
-    }
-    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu подтверждение не требуется
-    @Step("Пользователь печатает приложение к акту проверки исполнения предписания")
-    public void userPrintAttachToCheckActWithoutConfirm() {
-        userPrintDocument(printAttachToCheckActButton);
     }
 
     @Step("Проверяем наличие печатной формы")
@@ -273,19 +268,14 @@ public class DocumentsPage extends Page {
     }
 
     @Step("Пользователь открывает предписание")
-    public void userOpenPrescription(){
-        userOpenDocument(resultSearchField, prescriptionPageTitle);
+    public String userOpenPrescription(){
+        return userOpenDocument(resultSearchField, prescriptionPageTitle);
     }
 
     @Step("Пользователь печатает предписание")
     public void userPrintPrescription() {
         userPrintDocument(printPrescriptionButton);
         userConfirmPrint();
-    }
-    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu подтверждение не требуется
-    @Step("Пользователь печатает предписание")
-    public void userPrintPrescriptionWithoutConfirm() {
-        userPrintDocument(printPrescriptionButton);
     }
 
     @Step("Проверяем наличие печатной формы")
@@ -294,19 +284,14 @@ public class DocumentsPage extends Page {
     }
 
     @Step("Пользователь открывает определение об отказе в возбуждении дела")
-    public void userOpenDenyCriminal(){
-        userOpenDocument(resultSearchField, denyCriminalPageTitle);
+    public String userOpenDenyCriminal(){
+        return userOpenDocument(resultSearchField, denyCriminalPageTitle);
     }
 
     @Step("Пользователь печатает определение об отказе в возбуждении дела")
     public void userPrintDenyCriminal() {
         userPrintDocument(printDenyCriminalButton);
         userConfirmPrint();
-    }
-    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu подтверждение не требуется
-    @Step("Пользователь печатает определение об отказе в возбуждении дела")
-    public void userPrintDenyCriminalWithoutConfirm() {
-        userPrintDocument(printDenyCriminalButton);
     }
 
     @Step("Проверяем наличие печатной формы")
@@ -315,8 +300,8 @@ public class DocumentsPage extends Page {
     }
 
     @Step("Пользователь открывает Решение об отзыве предписания")
-    public void userOpenRevokePrescription(){
-        userOpenDocument(resultSearchField, revokePrescriptionPageTitle);
+    public String userOpenRevokePrescription(){
+        return userOpenDocument(resultSearchField, revokePrescriptionPageTitle);
     }
 
     @Step("Пользователь печатает Решение об отзыве предписания")
@@ -330,19 +315,14 @@ public class DocumentsPage extends Page {
     }
 
     @Step("Пользователь открывает акт мониторинга")
-    public void userOpenMonitoringAct(){
-        userOpenDocument(resultSearchField, monitoringActsPageTitle);
+    public String userOpenMonitoringAct(){
+        return userOpenDocument(resultSearchField, monitoringActsPageTitle);
     }
 
     @Step("Пользователь печатает акт мониторинга")
     public void userPrintMonitoringAct() {
         userPrintDocument(printMonitoringActButton);
         userConfirmPrint();
-    }
-    //для ролей ggi_oap,  kochetkovana_bigboss, laptev_obu подтверждение не требуется
-    @Step("Пользователь печатает акт мониторинга")
-    public void userPrintMonitoringActWithoutConfirm() {
-        userPrintDocument(printMonitoringActButton);
     }
 
     @Step("Проверяем наличие печатной формы")

@@ -26,16 +26,12 @@
 			<class name="ru.fors.tests.PrintFormsTests"/>
 			<methods>
 				<exclude name="printViewActTest"/>
-				<exclude name="printViewActWithoutConfirmTest"/>
 				<exclude name="printMonitoringActTest"/>
-				<exclude name="printMonitoringActWithoutConfirmTest"/>
 				<exclude name="printAttachToActTest"/>
 				<exclude name="printCheckActTest"/>
 				<exclude name="printDenyCriminalTest"/>
-				<exclude name="printDenyCriminalWithoutConfirmTest"/>
 				<exclude name="printActTest"/>
 				<exclude name="printPrescriptionTest"/>
-				<exclude name="printPrescriptionWithoutConfirmTest"/>
 				<exclude name="printAttachToCheckActTest"/>
 			</methods>
 		</classes>

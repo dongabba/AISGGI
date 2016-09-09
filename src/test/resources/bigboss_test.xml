@@ -14,14 +14,6 @@
 			<class name="ru.fors.tests.PrintFormsTests"/>
 			<methods>
 				<exclude name="printRevokePrescriptionTest"/>
-				<exclude name="printViewActTest"/>
-				<exclude name="printMonitoringActTest"/>
-				<exclude name="printAttachToActTest"/>
-				<exclude name="printCheckActTest"/>
-				<exclude name="printDenyCriminalTest"/>
-				<exclude name="printActTest"/>
-				<exclude name="printPrescriptionTest"/>
-				<exclude name="printAttachToCheckActTest"/>
 			</methods>
 		</classes>
 	</test>

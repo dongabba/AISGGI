@@ -81,8 +81,8 @@ public class MainMenu extends Page {
     By polpredPresidentReport = By.linkText("Отчет полномочному представителю Президента РФ");
     By dataOfDocEnteredReport2 = By.linkText("Данные по документам, введенным в АИС ГЖИ");
 
-    //=======Меню юридическое управление========
-    By jurReports = By.linkText("Юридическое управление");
+    //=======Меню общие========
+    By commonReports = By.linkText("Общие");
     By journalOfInspectionsControlsReport = By.linkText("Журнал учета проверок");
     By jurRptByArticle19_5 = By.linkText("Отчет по статье 19.5");
     By registryComplusionReport = By.linkText("Реестр поданных исковых заявлений и понуждении исполнения предписаний");
@@ -419,49 +419,49 @@ public class MainMenu extends Page {
     //Журнал учета проверок
     @Step("Переходим к отчету \"Журнал учета проверок\"")
     public ReportsPage userGoToJournalOfInspectionsControlsReport(){
-        clickOn3Link(reportsLink, jurReports, journalOfInspectionsControlsReport);
+        clickOn3Link(reportsLink, commonReports, journalOfInspectionsControlsReport);
         return new ReportsPage(driver);
     }
 
     //Отчет по статье 19.5
     @Step("Переходим к отчету \"Отчет по статье 19.5\"")
     public ReportsPage userGoToJurRptByArticle19_5(){
-        clickOn3Link(reportsLink, jurReports, jurRptByArticle19_5);
+        clickOn3Link(reportsLink, commonReports, jurRptByArticle19_5);
         return new ReportsPage(driver);
     }
 
     //Реестр поданных исковых заявлений и понуждении исполнения предписаний
     @Step("Переходим к отчету \"Реестр поданных исковых заявлений и понуждении исполнения предписаний\"")
     public ReportsPage userGoToRegistryComplusionReport(){
-        clickOn3Link(reportsLink, jurReports, registryComplusionReport);
+        clickOn3Link(reportsLink, commonReports, registryComplusionReport);
         return new ReportsPage(driver);
     }
 
     //Реестр исковых заявлений (суды общей юрисдикции)
     @Step("Переходим к отчету \"Реестр исковых заявлений (суды общей юрисдикции)\"")
     public ReportsPage userGoToRegistryClaimsForCourtsOfGeneralJurisdictionReport(){
-        clickOn3Link(reportsLink, jurReports, registryClaimsForCourtsOfGeneralJurisdictionReport);
+        clickOn3Link(reportsLink, commonReports, registryClaimsForCourtsOfGeneralJurisdictionReport);
         return new ReportsPage(driver);
     }
 
     //Реестр дисквалифицированных лиц
     @Step("Переходим к отчету \"Реестр дисквалифицированных лиц\"")
     public ReportsPage userGoToRegisterOfDisqualifiedOfficialsManagingOrganizationsReport(){
-        clickOn3Link(reportsLink, jurReports, registerOfDisqualifiedOfficialsManagingOrganizationsReport);
+        clickOn3Link(reportsLink, commonReports, registerOfDisqualifiedOfficialsManagingOrganizationsReport);
         return new ReportsPage(driver);
     }
 
     //Реестр предписаний
     @Step("Переходим к отчету \"Реестр предписаний\"")
     public ReportsPage userGoToJurManagementRegistryOfPrescriptionsReport(){
-        clickOn3Link(reportsLink, jurReports, jurManagementRegistryOfPrescriptionsReport);
+        clickOn3Link(reportsLink, commonReports, jurManagementRegistryOfPrescriptionsReport);
         return new ReportsPage(driver);
     }
 
     //Реестр предписаний для Мингосуправления МО
     @Step("Переходим к отчету \"Реестр предписаний для Мингосуправления МО\"")
     public ReportsPage userGoToJurManagementRegistryOfPrescriptionsMingosuReport(){
-        clickOn3Link(reportsLink, jurReports, jurManagementRegistryOfPrescriptionsMingosuReport);
+        clickOn3Link(reportsLink, commonReports, jurManagementRegistryOfPrescriptionsMingosuReport);
         return new ReportsPage(driver);
     }
 

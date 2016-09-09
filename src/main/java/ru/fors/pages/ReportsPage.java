@@ -45,8 +45,10 @@ public class ReportsPage extends MainMenu{
     By registerOfDisqualifiedOfficialsManagingOrganizationsReportTitle = By.xpath("//h3[text()='Реестр дисквалифицированных лиц']");
     By jurManagementRegistryOfPrescriptionsReportTitle = By.xpath("//h3[text()='Реестр предписаний']");
     By jurManagementRegistryOfPrescriptionsMingosuReportTitle = By.xpath("//h3[text()='Реестр предписаний для Мингосуправления МО']");
-    By dateFromField = By.cssSelector("input[name='dateInterval:from:date']");
-    By dateToField = By.cssSelector("input[name='dateInterval:to:date']");
+    By dateFromField = By.cssSelector("input[name='interval:from:date']");
+    By dateToField = By.cssSelector("input[name='interval:to:date']");
+    By dateFromField1 = By.cssSelector("input[name='dateInterval:from:date']");
+    By dateToField1 = By.cssSelector("input[name='dateInterval:to:date']");
     By buildButton = By.xpath("//button[text()='Сформировать']");
     By buildButton2 = By.cssSelector("button[class*='left']");
     By numTO = By.cssSelector("select[name*='numTO']");
@@ -57,10 +59,19 @@ public class ReportsPage extends MainMenu{
     }
     @Step("Устанавливаем дату с")
     public void userSetDataFrom(String date){
-        type(dateFromField, date);
+        type(dateFromField1, date);
     }
     @Step("Устанавливаем дату по")
     public void userSetDataTo(String date){
+        type(dateToField1, date);
+    }
+
+    @Step("Устанавливаем дату с")
+    public void userSetDataFrom1(String date){
+        type(dateFromField, date);
+    }
+    @Step("Устанавливаем дату по")
+    public void userSetDataTo1(String date){
         type(dateToField, date);
     }
     @Step("Строим отчет")
@@ -80,8 +91,8 @@ public class ReportsPage extends MainMenu{
 
     public void userBuildDataOfDocEnteredReport2(String dateFrom, String dateTo) throws InterruptedException {
         waitForReportLoaded(dataOfDocEnteredReport2Title);
-        userSetDataFrom(dateFrom);
-        userSetDataTo(dateTo);
+        userSetDataFrom1(dateFrom);
+        userSetDataTo1(dateTo);
         userBuildReport();
     }
 

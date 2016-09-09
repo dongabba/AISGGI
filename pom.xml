@@ -11,7 +11,7 @@
 	  	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	  	<allure.version>1.4.23</allure.version>
         <aspectj.version>1.8.5</aspectj.version>
-		<selenium.version>2.53.0</selenium.version>
+		<selenium.version>2.53.1</selenium.version>
 	  	<url>http://aisggi.fors.ru:8080/ggi-inspection/login?1</url>
 		<dev.url>http://aisggi.fors.ru:8081/ggi-inspection</dev.url>
 	  	<wait.seconds>60</wait.seconds>
@@ -161,7 +161,7 @@
 				<imp.wait>${wait.seconds}</imp.wait>
 				<browser.name>chrome</browser.name>
 				<downloadDir>${windowsDir}</downloadDir>
-				<suites>debug</suites>
+				<suites>test_env2</suites>
 			</properties>
 		</profile>
 		<profile>

@@ -13,7 +13,7 @@ public class InspectionsPlanPage extends MainMenu{
     public InspectionsPlanPage(WebDriver driver) {
         super(driver);
     }
-    By jurAndIpPlanTitle = By.xpath("//h3[text()='Планы проведения проверок юридических лиц и индивидуальных предпринимателей']");
+    By jurAndIpPlanTitle = By.xpath("//h3[text()='Планы проведения проверок']");
 
     private boolean isPageFormed(By element){
         try{
@@ -23,7 +23,7 @@ public class InspectionsPlanPage extends MainMenu{
             return false;
         }
     }
-    @Step("Проверяем открылась ли страница \"План проверок ЮЛ/ИП\"")
+    @Step("Проверяем открылась ли страница \"Планы проведения проверок\"")
     public boolean isJurAndIpPlanPageFormed(){
         return isPageFormed(jurAndIpPlanTitle);
     }
